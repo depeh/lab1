@@ -3,38 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista över filer</title>
+    <title>Visa i webbläsaren</title>
 </head>
 <body>
 
-    <h1>Lista över filer</h1>
+    <h1>Visa i webbläsaren</h1>
 
-    <ul>
-        <!-- Här lägger vi till JavaScript för att hämta en lista över filer från mappen -->
-        <script>
-            // Anropar en funktion för att hämta filerna från mappen
-            fetch('/') // Byt ut '/lab1/' med sökvägen till din mapp
-            .then(response => response.text())
-            .then(text => {
-                // Skapa ett temporärt element för att ladda in HTML från texten
-                const tempElement = document.createElement('div');
-                tempElement.innerHTML = text;
-
-                // Hämta alla länkar från det temporära elementet
-                const links = tempElement.querySelectorAll('a');
-
-                // Loopa igenom alla länkar och skapa listelement med länkar
-                links.forEach(link => {
-                    const listItem = document.createElement('li');
-                    const anchor = document.createElement('a');
-                    anchor.textContent = link.textContent;
-                    anchor.href = link.href;
-                    listItem.appendChild(anchor);
-                    document.querySelector('ul').appendChild(listItem);
-                });
-            });
-        </script>
-    </ul>
+    <p><a href="https://docs.google.com/viewer?url=https://depeh.github.io/lab1/test.docx" target="_blank">Visa i webbläsaren</a></p>
 
 </body>
 </html>
