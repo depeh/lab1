@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa Word-dokument</title>
+</head>
+<body>
+
+    <h1>Visa Word-dokument</h1>
+
+    <!-- Länk till Google Docs Viewer -->
+    <p><a href="#" id="openViewer">Visa Word-dokument</a></p>
+
+    <!-- iframe för att bädda in Google Docs Viewer -->
+    <div id="viewerContainer" style="display: none;">
+        <iframe id="documentViewer" src="" width="100%" height="500px" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        // Funktion för att öppna Google Docs Viewer i iframe
+        function openViewer() {
+            var viewerContainer = document.getElementById("viewerContainer");
+            var documentViewer = document.getElementById("documentViewer");
+            var documentUrl = "https://docs.google.com/viewer?url=https://depeh.github.io/lab1/test.docx";
+
+            // Uppdatera iframe källan med dokumentets URL
+            documentViewer.src = documentUrl;
+            viewerContainer.style.display = "block"; // Visa iframe-kontainern
+        }
+
+        // Lyssna på klick på länken och öppna dokumentet i Google Docs Viewer
+        document.getElementById("openViewer").addEventListener("click", function(event) {
+            event.preventDefault();
+            openViewer();
+        });
+    </script>
+
+</body>
+</html>
