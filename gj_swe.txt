@@ -1,0 +1,69 @@
+Göran Johansson
+LinkedIn: https://www.linkedin.com/in/goranj
+GitHub: https://github.com/depeh
+
+Om mig
+Jag har 20+ års erfarenhet av utveckling och är starkt lösningsorienterad. I över två decennier har jag löst tekniska problem åt kunder, chefer och kollegor – alltid med fokus på tydlig arkitektur, robust kod och praktisk nytta. Jag har byggt verktyg, plattformar, spel och system i många former, ofta under press och med höga krav på leverans.
+
+Relevanta tekniska resultat
+- Byggt ett asynkront köhanteringssystem i Node.js och MySQL för API-anrop och mejl (Q).
+- Utvecklat hela VipCart – en global e-handelsplattform i PHP/JavaScript/MySQL.
+- Byggt ett rensningsverktyg i Swift/macOS för Final Cut Pro-projekt (FCP Cleaner).
+- Skapat flera iOS/macOS-spel i Swift (bl.a. Mega Shuffleboard för Apple TV).
+- Arkitektat ett CRM som integrerades med Salesforce och använde deras databaslösning (database.com).
+- Byggt system för elektronisk fakturering i C# och MS-SQL.
+- Byggt KPI-system i PHP och MySQL med visuell rapportering.
+- Designat ett köhanteringssystem i Node.js för API och e-post med full retry-logik.
+- Byggt integrationer för realtidsvideoströmning till iPhone, iPad och Android.
+- Utvecklat system för order/logistik och CRM-koppling i C# och MS-SQL.
+- Skapat verktyg för rensning av onödiga data i Final Cut Pro-projekt (Swift/macOS).
+- Ledde team som byggde 3D-visualiseringsplattform i PHP och MySQL.
+
+Tekniska färdigheter
+- Språk: Node.js, PHP, C#, Swift, Java, Python, JavaScript, SQL, VB, C/C++
+- Webb & API: REST, Graph API, HTML, XML, ASP.NET, Apex, PHP, Laravel
+- Databaser: MySQL, MS-SQL, Oracle SQL, Postgres, Database.com
+- Verktyg & Plattformar: Git, Docker, Azure, AWS, macOS, Linux, Windows
+- Övrigt: Fullstackutveckling, API-design, systemarkitektur, automation, CI/CD, SaaS-integration, teamledning
+
+Utvalda projekt
+
+- Real Kick Soccer (iOS & Apple TV)
+Swift, iOS, SpriteKit 
+Motion-kontrollerat (Apple TV) Fotbollsspel som nådde topp 20 i svenska App Store. Utvecklat grafik, fysikmotor, AI och kontrollsystem.
+Video: https://www.youtube.com/watch?v=CCDlJ4xqsZU
+
+- Q – Smart Queue System
+Node.js, MySQL, Unix
+Asynkront köhanteringssystem för API-anrop, mejl och batchjobb.
+GitHub: https://github.com/depeh/q
+
+- VipCart – Global E-commerce Platform
+PHP, JavaScript, MySQL, Unix
+Fullständig e-handelsplattform med backend, API, plugin-system, betalflöden och AI-rekommendationer.
+Webb: https://vipcart.eu
+
+- Final Cut Pro Cleaner (macOS)
+Swift, macOSX Unix
+Verktyg som rensar oanvända filer i enorma Final Cut Pro-projekt.
+Video: https://youtu.be/rqcRDuOF1CI
+
+
+- Alla Appar på AppStore
+Swift, SpriteKit, tvOS
+Det är bara att googla på: goran johansson appstore så får man upp alla appar jag gjort i Swift
+AppStore: https://apps.apple.com/no/developer/goran-johansson/id911992311?l=sv
+
+
+Kort historik
+- Addgile – Developer, teknisk projektledare (1+ år)
+- Farsight – Produktledare, utvecklingssamordning (1 år)
+- Sigma Technology – Tech Lead, SQL-utvecklare (1 år)
+- Simumatik – Fullstackutvecklare, team coach (2 år)
+- IUS Innovation – Backendutvecklare, teknisk projektledare (5 år)
+- Inexchange – C#-utvecklare, systemarkitekt (2 år)
+- Vera&John – PHP-utvecklare, Head of Development (1 år)
+- Ventelo – Team Lead, projektledare, CRM-utvecklare (4 år)
+- Sogeti – Konsult, systemutveckling (4 år)
+- Framfab – Webbutvecklare, systemintegration (4 år)
+- Egen verksamhet – Systemutveckling, webblösningar, automation (4 år)
