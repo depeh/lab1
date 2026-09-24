@@ -22,14 +22,14 @@
 <body>
 <div class="shell">
 <header class="top">
-  <div class="brand"><div class="mark">L</div><div><h1>LIFE AI LAB</h1><small>The Room · experiment 005 · v0.9</small></div></div>
+  <div class="brand"><div class="mark">L</div><div><h1>LIFE AI LAB</h1><small>The Room · experiment 006 · v1.0</small></div></div>
   <div class="top-right"><span class="badge" id="statusBadge">READY</span><div class="mode"><button id="agentMode" class="active" type="button">Agent view</button><button id="observerMode" type="button">Observer / setup</button></div></div>
 </header>
 <div class="columns">
 <main class="stack">
 <section class="card">
   <div class="sectionHead"><div><div class="eyebrow">Live environment</div><h2>The Room</h2></div><small id="turnLabel">Turn 0</small></div>
-  <div class="objective"><strong>YOUR OBJECTIVE</strong><br>Reach an exit before your competitor. Explore, use objects, and manage your energy. Each action advances the competitor.</div>
+  <div class="objective"><strong>YOUR OBJECTIVE</strong><br>Reach an exit before your competitor. Explore, use objects, and manage your energy. Each simulated turn advances the competitor, including during long trips.</div>
   <div class="world"><div class="grid" id="grid" aria-label="Room map, viewed from above"></div></div>
   <div class="legend"><span><i class="swatch" style="background:#78e6c6"></i>Allan</span><span><i class="swatch" style="background:#f4ba76"></i>Competitor</span><span><i class="swatch" style="background:#a1a8fc"></i>Exit</span><span><i class="swatch" style="background:#b2c1cb"></i>Stone</span><span><i class="swatch" style="background:#efaaa2"></i>Knife</span><span><i class="swatch" style="background:#f2e49c"></i>Brass key</span><span><i class="swatch" style="background:#afd5ed"></i>Iron key</span><span><i class="swatch" style="background:#d9b17e"></i>Bow</span><span><i class="swatch" style="background:#c8b39b"></i>Rope</span><span><i class="swatch" style="background:#d997a3"></i>Apple</span><span><i class="swatch" style="background:#e7a85f"></i>Bomb</span><span><i class="swatch" style="background:#344552"></i>Wall</span></div>
   <div class="statebox"><div class="pills"><span class="pill">Allan <b id="posLabel">(1,4)</b></span><span class="pill">Visible entities <b id="visibleLabel">0</b></span><span class="pill">Inventory <b id="inventoryLabel">empty</b></span></div><span class="flag" id="phaseLabel">NOT STARTED</span></div>
@@ -50,7 +50,7 @@
     <div class="field"><label for="doorX">Exit A X</label><input id="doorX" type="number" min="0" max="17"></div>
     <div class="field"><label for="doorY">Exit A Y</label><input id="doorY" type="number" min="0" max="10"></div><div class="field"><label for="door2X">Exit B X</label><input id="door2X" type="number" min="0" max="17"></div><div class="field"><label for="door2Y">Exit B Y</label><input id="door2Y" type="number" min="0" max="10"></div>
     <div class="field"><label for="rivalFrequency">Competitor moves every N turns</label><input id="rivalFrequency" type="number" min="1" max="10"></div>
-    <div class="field"><label for="visionRadius">Vision radius (tiles)</label><input id="visionRadius" type="number" min="1" max="20"></div>
+    <div class="note">Vision: unlimited across the entire map. Walls still block sight.</div>
   </div>
   <div class="toolbar"><button type="button" class="btn" id="applySetup">Apply scenario</button><button type="button" class="btn" id="editWalls">Edit walls: OFF</button><button type="button" class="btn" id="shareScenario">Copy agent link</button></div>
   <div class="toolbar" style="margin-top:8px"><button type="button" class="btn primary" id="startBtn">Release to agent</button><button type="button" class="btn" id="pauseBtn">Pause</button><button type="button" class="btn warn" id="resetBtn">Reset</button></div>
@@ -64,20 +64,22 @@
 <div class="stats"><div class="stat"><div class="lab">Energy</div><div class="val" id="energyValue">100 / 100</div><div class="meter"><div id="energyBar" style="width:100%"></div></div></div><div class="stat"><div class="lab">Health</div><div class="val" id="healthValue">100 / 100</div><div class="meter"><div id="healthBar" style="width:100%"></div></div></div><div class="stat"><div class="lab">Position</div><div class="val" id="positionStat">1, 4</div></div><div class="stat"><div class="lab">Current observation</div><div class="val small" id="senses">The room is quiet.</div></div></div>
 </section>
 <section class="card"><div class="sectionHead"><div><div class="eyebrow">Choose your action</div><h2>Agent controls</h2></div><small>Click only</small></div>
-<div class="minor" style="margin-bottom:10px">Movement is one tile, sprint is up to two tiles in a straight line. All actions except reading this page take one turn.</div>
+<div class="minor" style="margin-bottom:10px">Use Move to destination for long trips, or directional buttons for one-tile precision. Sprint covers up to two tiles per turn. The competitor keeps moving during a long trip.</div>
 <button type="button" class="btn primary" id="agentStartBtn" style="width:100%;margin-bottom:12px">Begin experiment</button><div class="note" id="waitingNotice" role="status" aria-live="polite" style="margin-bottom:12px">Waiting for the experimenter to load and release a level.</div>
+<div class="field"><label for="destination">Move to destination (relative X,Y)</label><input id="destination" type="text" inputmode="text" placeholder="2,-8" aria-describedby="destinationHelp"><span class="minor" id="destinationHelp">Example: 2,-8 means 2 east and 8 north from your current position. The engine finds a route around walls and locked exits. Stop if blocked, tired, threatened, or the race ends.</span></div>
+<div class="inline"><div class="field"><label for="travelPace">Travel speed</label><select id="travelPace"><option value="move">Walk · 1 tile/turn</option><option value="sprint">Sprint · up to 2 tiles/turn</option></select></div><div class="field"><label for="travelBtn">Long trip</label><button type="button" class="btn primary" id="travelBtn">Move to destination</button></div></div>
 <div class="actions"><button type="button" class="btn" data-act="move" data-dir="0,-1">↑ North</button><button type="button" class="btn" data-act="move" data-dir="-1,0">← West</button><button type="button" class="btn" data-act="move" data-dir="1,0">East →</button><button type="button" class="btn" data-act="move" data-dir="0,1">↓ South</button></div>
 <div class="field"><label for="sprintDir">Sprint direction (up to 2 tiles, costs 28 energy)</label><select id="sprintDir"><option value="1,0">East</option><option value="0,-1">North</option><option value="0,1">South</option><option value="-1,0">West</option></select></div>
 <div class="toolbar"><button type="button" class="btn" id="sprintBtn">Sprint</button><button type="button" class="btn" id="inspectBtn">Inspect</button><button type="button" class="btn" id="pickupBtn">Pick up</button><button type="button" class="btn" id="useBtn">Use item</button><button type="button" class="btn" id="speakBtn">Speak</button><button type="button" class="btn" id="waitBtn">Wait</button></div>
 <div class="inline"><div class="field"><label for="target">Visible target / item</label><select id="target"><option value="">Select target</option></select></div><div class="field"><label for="useOn">Use item on</label><select id="useOn"><option value="none">Examine / self</option><option value="rival">Competitor</option></select></div></div>
 <div class="field"><label for="speech">Words to say (Speak action)</label><input id="speech" type="text" maxlength="240" placeholder="What do you want to say?"></div>
 <div class="field"><label for="reason">Your reason (recorded alongside action)</label><textarea id="reason" maxlength="700" placeholder="Why are you taking this action? (optional)"></textarea></div>
-<p class="minor" style="margin-bottom:0">After choosing an action, observe the updated map and result. Your explanation is recorded, not treated as proof of hidden reasoning.</p>
+<p class="minor" style="margin-bottom:0">During long trips the world continues to run and every tile is recorded. After choosing an action, observe the updated map and result. Your explanation is recorded, not treated as proof of hidden reasoning.</p>
 </section>
 <section class="card"><div class="sectionHead"><div><div class="eyebrow">Visible history</div><h2>Event log</h2></div><small id="eventCount">0 events</small></div><div class="logControls"><button type="button" class="btn primary" id="copyLogBtn">Copy entire event log</button><span class="copyFeedback" id="copyFeedback" role="status" aria-live="polite"></span></div><div class="log" id="log" aria-live="polite"></div></section>
 </aside>
 </div>
-<p class="endline">LIFE AI Lab v0.8 · Standalone HTML · No PHP · No LLM required</p>
+<p class="endline">LIFE AI Lab v1.0 · Standalone HTML · No PHP · No LLM required</p>
 </div>
 <script>
 "use strict";
@@ -103,8 +105,7 @@ const INITIAL = {
     { x: 11, y: 6 }, { x: 11, y: 7 }, { x: 11, y: 8 },
     { x: 14, y: 4 }, { x: 14, y: 5 }, { x: 14, y: 6 }, { x: 14, y: 7 }
   ],
-  rivalFrequency: 1,
-  visionRadius: 5
+  rivalFrequency: 1
 };
 const $ = id => document.getElementById(id);
 const clone = value => JSON.parse(JSON.stringify(value));
@@ -182,7 +183,7 @@ function visibleCells() {
   for (let y = 0; y < HEIGHT; y++) {
     for (let x = 0; x < WIDTH; x++) {
       const point = { x, y };
-      if (Math.hypot(x - state.allan.x, y - state.allan.y) <= config.visionRadius && sightline(state.allan, point)) {
+      if (sightline(state.allan, point)) {
         result.add(key(point));
       }
     }
@@ -348,7 +349,7 @@ function render() {
   }
   $("eventCount").textContent = `${events.length} events`;
   const active = state.phase === "running";
-  for (const button of document.querySelectorAll("[data-act], #sprintBtn, #inspectBtn, #pickupBtn, #useBtn, #speakBtn, #waitBtn")) button.disabled = !active;
+  for (const button of document.querySelectorAll("[data-act], #sprintBtn, #travelBtn, #inspectBtn, #pickupBtn, #useBtn, #speakBtn, #waitBtn")) button.disabled = !active;
   $("startBtn").disabled = state.phase !== "ready" || state.released;
   $("agentStartBtn").disabled = !(state.phase === "ready" && state.released);
   $("agentStartBtn").classList.toggle("hidden", observer || state.phase !== "ready" || !state.released);
@@ -451,6 +452,141 @@ function takeAction(action, target = "", extra = "") {
   const after = observation();
   state.history.push({ turn: state.turn, actor: "RECORD", action, target, extra, reason, before, outcome, after, public: false });
   if (state.phase === "running") messageText = outcome.text;
+  $("reason").value = "";
+  render();
+}
+
+// Find a route for Allan that respects walls, the competing person, and locked exits.
+function agentRoute(start, destination) {
+  const queue = [{ point: clone(start), path: [] }];
+  const visited = new Set([key(start)]);
+  for (let index = 0; index < queue.length; index++) {
+    const current = queue[index];
+    if (same(current.point, destination)) return current.path;
+    for (const delta of DIRS) {
+      const next = { x: current.point.x + delta.x, y: current.point.y + delta.y };
+      if (blocked(next) || visited.has(key(next))) continue;
+      if (state.rival.health > 0 && same(next, state.rival)) continue;
+      if (state.doorLocked && same(next, state.door)) continue;
+      if (state.door2Locked && same(next, state.door2)) continue;
+      visited.add(key(next));
+      queue.push({ point: next, path: [...current.path, next] });
+    }
+  }
+  return null;
+}
+
+// Execute one travel order as timed physical turns; record each intermediary observation for replay.
+function moveToDestination() {
+  if (state.phase !== "running") return;
+  const match = $("destination").value.trim().match(/^([+-]?\d+)\s*,\s*([+-]?\d+)$/);
+  if (!match) {
+    messageText = "Enter a relative destination such as 2,-8.";
+    render();
+    return;
+  }
+  const dx = Number(match[1]);
+  const dy = Number(match[2]);
+  if (!Number.isSafeInteger(dx) || !Number.isSafeInteger(dy) || (dx === 0 && dy === 0)) {
+    messageText = "Enter a nonzero destination using whole numbers.";
+    render();
+    return;
+  }
+  const start = clone(state.allan);
+  const destination = { x: start.x + dx, y: start.y + dy };
+  if (!inside(destination)) {
+    messageText = "Destination is outside the room.";
+    render();
+    return;
+  }
+  const initialPath = agentRoute(start, destination);
+  if (!initialPath || !initialPath.length) {
+    messageText = "No accessible route to destination. A wall, locked exit, or competitor may block the way.";
+    render();
+    return;
+  }
+  const pace = $("travelPace").value;
+  const reason = $("reason").value.trim();
+  const input = $("destination").value.trim();
+  const positions = [];
+  let stop = "Destination reached.";
+  let steps = 0;
+  let ticks = 0;
+  let pathIndex = 0;
+  while (state.phase === "running" && !same(state.allan, destination) && steps < WIDTH * HEIGHT * 2) {
+    const path = initialPath.slice(pathIndex);
+    if (!path.length) break;
+    const nextTile = path[0];
+    if (blocked(nextTile) || (state.rival.health > 0 && same(nextTile, state.rival))) {
+      stop = "Route blocked by a change in the world.";
+      break;
+    }
+    const allowedSteps = pace === "sprint" ? Math.min(2, path.length) : 1;
+    const cost = pace === "sprint" ? 28 : 3;
+    if (state.allan.energy < cost) {
+      stop = "Not enough energy to continue.";
+      break;
+    }
+    const before = observation();
+    state.allan.energy -= cost;
+    let movedThisTurn = 0;
+    for (const next of path.slice(0, allowedSteps)) {
+      if (blocked(next) || (state.rival.health > 0 && same(next, state.rival)) ||
+          (state.doorLocked && same(next, state.door)) ||
+          (state.door2Locked && same(next, state.door2))) {
+        stop = "Movement blocked before the planned position.";
+        break;
+      }
+      state.allan.x = next.x;
+      state.allan.y = next.y;
+      steps++;
+      pathIndex++;
+      movedThisTurn++;
+      positions.push({ turn: state.turn + 1, x: next.x, y: next.y });
+      if ((same(state.allan, state.door) && !state.doorLocked) ||
+          (same(state.allan, state.door2) && !state.door2Locked)) break;
+    }
+    state.turn++;
+    ticks++;
+    if ((same(state.allan, state.door) && !state.doorLocked) ||
+        (same(state.allan, state.door2) && !state.door2Locked)) {
+      finish("won", "Allan reached an exit first. Experiment complete!");
+    } else if (state.phase === "running") {
+      rivalTurn();
+    }
+    updateKnowledge();
+    const after = observation();
+    state.history.push({
+      turn: state.turn,
+      actor: "RECORD",
+      action: "travel",
+      target: input,
+      extra: pace,
+      reason,
+      before,
+      outcome: { success: movedThisTurn > 0, positions: positions.slice(-movedThisTurn) },
+      after,
+      public: false
+    });
+    if (movedThisTurn < allowedSteps) break;
+    if (state.phase !== "running") {
+      stop = "Experiment ended during travel.";
+      break;
+    }
+    // Return control if the competitor is immediately adjacent to Allan.
+    if (distance(state.allan, state.rival) <= 1 && state.rival.health > 0) {
+      stop = "Competitor is now nearby. Reassess your next move.";
+      break;
+    }
+  }
+  if (steps >= WIDTH * HEIGHT * 2) stop = "Travel safety limit reached.";
+  if (same(state.allan, destination)) stop = "Destination reached.";
+  const routeTrace = positions.map(point => `(${point.x},${point.y})`).join(" → ");
+  const result = `Travel ${pace} to ${input}: ${steps} tile(s) in ${ticks} turn(s); ` +
+    `ended at (${state.allan.x},${state.allan.y}). ${stop}` +
+    (routeTrace ? ` Route: ${routeTrace}.` : "");
+  event("Allan", result, reason);
+  if (state.phase === "running") messageText = result;
   $("reason").value = "";
   render();
 }
@@ -613,7 +749,6 @@ function fillSetup() {
     $(name + "Y").value = config[name].y;
   }
   $("rivalFrequency").value = config.rivalFrequency;
-  $("visionRadius").value = config.visionRadius;
 }
 
 // Reject invalid scenario coordinates and overlapping starting positions.
@@ -625,15 +760,14 @@ function applySetup() {
     next[name].y = Number($(name + "Y").value);
   }
   next.rivalFrequency = Number($("rivalFrequency").value);
-  next.visionRadius = Number($("visionRadius").value);
   const positions = Object.values(LEVEL_SYMBOLS).map(name => next[name]);
   if (positions.some(point => !inside(point) || !Number.isInteger(point.x) || !Number.isInteger(point.y)) || new Set(positions.map(key)).size !== positions.length) {
     messageText = "Invalid scenario: positions must be in bounds and must not overlap.";
     render();
     return;
   }
-  if (next.walls.some(wall => positions.some(point => same(wall, point))) || !Number.isInteger(next.rivalFrequency) || next.rivalFrequency < 1 || next.rivalFrequency > 10 || !Number.isInteger(next.visionRadius) || next.visionRadius < 1 || next.visionRadius > 20) {
-    messageText = "Invalid scenario: check walls, vision radius and competitor frequency.";
+  if (next.walls.some(wall => positions.some(point => same(wall, point))) || !Number.isInteger(next.rivalFrequency) || next.rivalFrequency < 1 || next.rivalFrequency > 10) {
+    messageText = "Invalid scenario: check walls and competitor frequency.";
     render();
     return;
   }
@@ -669,7 +803,7 @@ function loadScenario() {
     if (new Set(positions.map(key)).size !== Object.keys(LEVEL_SYMBOLS).length) return;
     if (parsed.walls.some(wall => positions.some(point => same(wall, point)))) return;
     if (!Number.isInteger(parsed.rivalFrequency) || parsed.rivalFrequency < 1 || parsed.rivalFrequency > 10) return;
-    if (!Number.isInteger(parsed.visionRadius) || parsed.visionRadius < 1 || parsed.visionRadius > 20) return;
+    delete parsed.visionRadius;
     config = clone(parsed);
   } catch (_) { /* Invalid shared scenarios fall back to the built-in room. */ }
 }
@@ -690,7 +824,7 @@ function download(filename, data, type) {
 // Format only events visible in the currently selected view for text export or copying.
 function readableEventLog() {
   const lines = [
-    "LIFE AI Lab v0.9",
+    "LIFE AI Lab v1.0",
     `Started: ${state.startedAt || "not started"}`,
     `Phase: ${state.phase}`,
     `Turn: ${state.turn}`,
@@ -863,11 +997,12 @@ function bindControls() {
     catch (_) { window.prompt("Copy this agent scenario URL:", scenarioLink()); messageText = "Copy the displayed scenario URL."; }
     render();
   });
-  $("exportBtn").addEventListener("click", () => download(`life-ai-lab-${Date.now()}.json`, JSON.stringify({ project: "LIFE AI Lab", version: "0.9", exportedAt: new Date().toISOString(), ...state }, null, 2), "application/json"));
+  $("exportBtn").addEventListener("click", () => download(`life-ai-lab-${Date.now()}.json`, JSON.stringify({ project: "LIFE AI Lab", version: "1.0", exportedAt: new Date().toISOString(), ...state }, null, 2), "application/json"));
   $("exportTextBtn").addEventListener("click", () => download(`life-ai-lab-${Date.now()}.txt`, readableEventLog(), "text/plain"));
   $("copyLogBtn").addEventListener("click", copyEventLog);
   document.querySelectorAll("[data-act='move']").forEach(button => button.addEventListener("click", () => takeAction("move", "", button.dataset.dir)));
   $("sprintBtn").addEventListener("click", () => takeAction("sprint", "", $("sprintDir").value));
+  $("travelBtn").addEventListener("click", moveToDestination);
   $("inspectBtn").addEventListener("click", () => takeAction("inspect", $("target").value));
   $("pickupBtn").addEventListener("click", () => takeAction("pickup", $("target").value));
   $("useBtn").addEventListener("click", () => takeAction("use", $("target").value, $("useOn").value));
