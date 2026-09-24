@@ -22,14 +22,14 @@
 <body>
 <div class="shell">
 <header class="top">
-  <div class="brand"><div class="mark">L</div><div><h1>LIFE AI LAB</h1><small>The Room · experiment 006 · v1.0</small></div></div>
+  <div class="brand"><div class="mark">L</div><div><h1>LIFE AI LAB</h1><small>The Room · experiment 007 · v1.1</small></div></div>
   <div class="top-right"><span class="badge" id="statusBadge">READY</span><div class="mode"><button id="agentMode" class="active" type="button">Agent view</button><button id="observerMode" type="button">Observer / setup</button></div></div>
 </header>
 <div class="columns">
 <main class="stack">
 <section class="card">
   <div class="sectionHead"><div><div class="eyebrow">Live environment</div><h2>The Room</h2></div><small id="turnLabel">Turn 0</small></div>
-  <div class="objective"><strong>YOUR OBJECTIVE</strong><br>Reach an exit before your competitor. Explore, use objects, and manage your energy. Each simulated turn advances the competitor, including during long trips.</div>
+  <div class="objective"><strong>YOUR OBJECTIVE</strong><br><span id="objectiveText">Reach an exit before your competitor. Explore, use objects, and manage your energy.</span></div>
   <div class="world"><div class="grid" id="grid" aria-label="Room map, viewed from above"></div></div>
   <div class="legend"><span><i class="swatch" style="background:#78e6c6"></i>Allan</span><span><i class="swatch" style="background:#f4ba76"></i>Competitor</span><span><i class="swatch" style="background:#a1a8fc"></i>Exit</span><span><i class="swatch" style="background:#b2c1cb"></i>Stone</span><span><i class="swatch" style="background:#efaaa2"></i>Knife</span><span><i class="swatch" style="background:#f2e49c"></i>Brass key</span><span><i class="swatch" style="background:#afd5ed"></i>Iron key</span><span><i class="swatch" style="background:#d9b17e"></i>Bow</span><span><i class="swatch" style="background:#c8b39b"></i>Rope</span><span><i class="swatch" style="background:#d997a3"></i>Apple</span><span><i class="swatch" style="background:#e7a85f"></i>Bomb</span><span><i class="swatch" style="background:#344552"></i>Wall</span></div>
   <div class="statebox"><div class="pills"><span class="pill">Allan <b id="posLabel">(1,4)</b></span><span class="pill">Visible entities <b id="visibleLabel">0</b></span><span class="pill">Inventory <b id="inventoryLabel">empty</b></span></div><span class="flag" id="phaseLabel">NOT STARTED</span></div>
@@ -39,7 +39,7 @@
   <div class="sectionHead"><div><div class="eyebrow">Experiment control</div><h2>Scenario & recording</h2></div></div>
   <p class="minor">Paste a level or generate a random one while Allan waits. Click Release to agent when you are done, then return to Agent view. Allan can begin only after release. Everything runs locally in this browser.</p>
   <div class="field"><label for="levelText">Paste level layout (18 × 11, one character per tile)</label><textarea id="levelText" class="levelInput" spellcheck="false" aria-label="Editable level layout"></textarea></div>
-  <p class="minor">Legend: . floor, # wall, A Allan, C competitor, 1 Exit A, 2 Exit B, S stone, K knife, B brass key, I iron key, P bow, R rope, F food (apple), X bomb (can injure Allan). Paste 11 rows of 18 characters, or one compact 198-character string. Every named item must appear exactly once. Spaces and newlines are ignored.</p>
+  <p class="minor">Legend: . floor, # wall, A Allan, C competitor, 1 Exit A, 2 Exit B, S stone, K knife, B brass key, I iron key, P bow, R rope, F food (apple), X bomb (can injure Allan). Paste 11 rows of 18 characters, or one compact 198-character string. Required: exactly one A (Allan) and at least one exit (1 or 2). All other symbols are optional, but each may occur at most once. With no iron key or bomb, exits start unlocked. Spaces and newlines are ignored.</p>
   <div class="toolbar"><button type="button" class="btn primary" id="loadLevelBtn">Load pasted level</button><button type="button" class="btn" id="copyLevelBtn">Copy level code</button><button type="button" class="btn" id="randomLevelBtn">Generate random level</button></div>
   <div class="liveIndicator" id="adminLiveStatus">Same-browser setup: paste a level, load it, release the agent, and switch back to Agent view. No server required.</div>
   <div class="setupGrid">
@@ -50,7 +50,7 @@
     <div class="field"><label for="doorX">Exit A X</label><input id="doorX" type="number" min="0" max="17"></div>
     <div class="field"><label for="doorY">Exit A Y</label><input id="doorY" type="number" min="0" max="10"></div><div class="field"><label for="door2X">Exit B X</label><input id="door2X" type="number" min="0" max="17"></div><div class="field"><label for="door2Y">Exit B Y</label><input id="door2Y" type="number" min="0" max="10"></div>
     <div class="field"><label for="rivalFrequency">Competitor moves every N turns</label><input id="rivalFrequency" type="number" min="1" max="10"></div>
-    <div class="note">Vision: unlimited across the entire map. Walls still block sight.</div>
+    <div class="note">Vision: unlimited across the entire map. Walls still block sight. Leave both X and Y empty to omit an optional competitor or exit.</div>
   </div>
   <div class="toolbar"><button type="button" class="btn" id="applySetup">Apply scenario</button><button type="button" class="btn" id="editWalls">Edit walls: OFF</button><button type="button" class="btn" id="shareScenario">Copy agent link</button></div>
   <div class="toolbar" style="margin-top:8px"><button type="button" class="btn primary" id="startBtn">Release to agent</button><button type="button" class="btn" id="pauseBtn">Pause</button><button type="button" class="btn warn" id="resetBtn">Reset</button></div>
@@ -64,7 +64,7 @@
 <div class="stats"><div class="stat"><div class="lab">Energy</div><div class="val" id="energyValue">100 / 100</div><div class="meter"><div id="energyBar" style="width:100%"></div></div></div><div class="stat"><div class="lab">Health</div><div class="val" id="healthValue">100 / 100</div><div class="meter"><div id="healthBar" style="width:100%"></div></div></div><div class="stat"><div class="lab">Position</div><div class="val" id="positionStat">1, 4</div></div><div class="stat"><div class="lab">Current observation</div><div class="val small" id="senses">The room is quiet.</div></div></div>
 </section>
 <section class="card"><div class="sectionHead"><div><div class="eyebrow">Choose your action</div><h2>Agent controls</h2></div><small>Click only</small></div>
-<div class="minor" style="margin-bottom:10px">Use Move to destination for long trips, or directional buttons for one-tile precision. Sprint covers up to two tiles per turn. The competitor keeps moving during a long trip.</div>
+<div class="minor" style="margin-bottom:10px">Use Move to destination for long trips, or directional buttons for one-tile precision. Sprint covers up to two tiles per turn. Any competitor keeps moving during a long trip.</div>
 <button type="button" class="btn primary" id="agentStartBtn" style="width:100%;margin-bottom:12px">Begin experiment</button><div class="note" id="waitingNotice" role="status" aria-live="polite" style="margin-bottom:12px">Waiting for the experimenter to load and release a level.</div>
 <div class="field"><label for="destination">Move to destination (relative X,Y)</label><input id="destination" type="text" inputmode="text" placeholder="2,-8" aria-describedby="destinationHelp"><span class="minor" id="destinationHelp">Example: 2,-8 means 2 east and 8 north from your current position. The engine finds a route around walls and locked exits. Stop if blocked, tired, threatened, or the race ends.</span></div>
 <div class="inline"><div class="field"><label for="travelPace">Travel speed</label><select id="travelPace"><option value="move">Walk · 1 tile/turn</option><option value="sprint">Sprint · up to 2 tiles/turn</option></select></div><div class="field"><label for="travelBtn">Long trip</label><button type="button" class="btn primary" id="travelBtn">Move to destination</button></div></div>
@@ -79,7 +79,7 @@
 <section class="card"><div class="sectionHead"><div><div class="eyebrow">Visible history</div><h2>Event log</h2></div><small id="eventCount">0 events</small></div><div class="logControls"><button type="button" class="btn primary" id="copyLogBtn">Copy entire event log</button><span class="copyFeedback" id="copyFeedback" role="status" aria-live="polite"></span></div><div class="log" id="log" aria-live="polite"></div></section>
 </aside>
 </div>
-<p class="endline">LIFE AI Lab v1.0 · Standalone HTML · No PHP · No LLM required</p>
+<p class="endline">LIFE AI Lab v1.1 · Standalone HTML · No PHP · No LLM required</p>
 </div>
 <script>
 "use strict";
@@ -112,7 +112,7 @@ const clone = value => JSON.parse(JSON.stringify(value));
 const key = point => `${point.x},${point.y}`;
 const inside = point => point.x >= 0 && point.x < WIDTH && point.y >= 0 && point.y < HEIGHT;
 const distance = (a, b) => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
-const same = (a, b) => a.x === b.x && a.y === b.y;
+const same = (a, b) => Boolean(a && b && a.x === b.x && a.y === b.y);
 const DIRS = [{ x: 1, y: 0 }, { x: 0, y: -1 }, { x: 0, y: 1 }, { x: -1, y: 0 }];
 const LEVEL_SYMBOLS = { A: "allan", C: "rival", "1": "door", "2": "door2", S: "stone", K: "knife", B: "brassKey", I: "ironKey", P: "bow", R: "rope", F: "apple", X: "bomb" };
 const LEVEL_REVERSE = Object.fromEntries(Object.entries(LEVEL_SYMBOLS).map(([symbol, name]) => [name, symbol]));
@@ -127,14 +127,14 @@ let messageText = "Start the experiment to begin.";
 function newWorld() {
   const world = {
     allan: { ...clone(config.allan), energy: 70, health: 100, inventory: [] },
-    rival: { ...clone(config.rival), health: 100, slowedUntil: 0, lockProgress: 0 },
+    rival: config.rival ? { ...clone(config.rival), health: 100, slowedUntil: 0, lockProgress: 0 } : null,
     door: clone(config.door),
     door2: clone(config.door2),
     items: Object.fromEntries(Object.values(LEVEL_SYMBOLS).filter(name => !["allan", "rival", "door", "door2"].includes(name)).map(name => [name, clone(config[name])])),
     bowArrows: 1,
     randomSeed: 1337,
-    doorLocked: true,
-    door2Locked: true,
+    doorLocked: Boolean(config.door && (config.ironKey || config.bomb)),
+    door2Locked: Boolean(config.door2 && (config.ironKey || config.bomb)),
     walls: clone(config.walls),
     turn: 0,
     phase: "ready",
@@ -202,9 +202,9 @@ function updateKnowledge() {
     if (point && visible.has(key(point))) state.discovered[name] = clone(point);
     if (!point) delete state.discovered[name];
   }
-  if (visible.has(key(state.door))) state.discovered.door = clone(state.door);
-  if (visible.has(key(state.door2))) state.discovered.door2 = clone(state.door2);
-  if (visible.has(key(state.rival)) && state.rival.health > 0) state.discovered.rival = clone(state.rival);
+  if (state.door && visible.has(key(state.door))) state.discovered.door = clone(state.door);
+  if (state.door2 && visible.has(key(state.door2))) state.discovered.door2 = clone(state.door2);
+  if (state.rival && visible.has(key(state.rival)) && state.rival.health > 0) state.discovered.rival = clone(state.rival);
 }
 
 // Return only objects currently visible to Allan.
@@ -214,9 +214,9 @@ function visibleEntities() {
   for (const [name, point] of Object.entries(state.items)) {
     if (point && visible.has(key(point))) entries.push({ name, point });
   }
-  if (visible.has(key(state.door))) entries.push({ name: "door", point: state.door });
-  if (visible.has(key(state.door2))) entries.push({ name: "door2", point: state.door2 });
-  if (state.rival.health > 0 && visible.has(key(state.rival))) entries.push({ name: "competitor", point: state.rival });
+  if (state.door && visible.has(key(state.door))) entries.push({ name: "door", point: state.door });
+  if (state.door2 && visible.has(key(state.door2))) entries.push({ name: "door2", point: state.door2 });
+  if (state.rival && state.rival.health > 0 && visible.has(key(state.rival))) entries.push({ name: "competitor", point: state.rival });
   return entries;
 }
 
@@ -259,7 +259,7 @@ function renderMap() {
       let type = "";
       if (canSee) {
         if (same(state.allan, point)) { label = "A"; type = "allan"; }
-        else if (state.rival.health > 0 && same(state.rival, point)) { label = "B"; type = "rival"; }
+        else if (state.rival && state.rival.health > 0 && same(state.rival, point)) { label = "B"; type = "rival"; }
         else if (same(state.door, point)) { label = state.doorLocked ? "A" : "OPEN"; type = "door"; }
         else if (same(state.door2, point)) { label = state.door2Locked ? "B" : "OPEN"; type = "door"; }
         else if (state.items.stone && same(state.items.stone, point)) { label = "S"; type = "stone"; }
@@ -307,6 +307,9 @@ function render() {
   $("healthBar").style.width = `${state.allan.health}%`;
   $("visibleLabel").textContent = visibleEntities().length;
   $("inventoryLabel").textContent = state.allan.inventory.join(", ") || "empty";
+  $("objectiveText").textContent = state.rival
+    ? "Reach an exit before your competitor. Explore, use objects, and manage your energy. Each turn advances the competitor."
+    : "Reach an exit. Explore, use objects, and manage your energy.";
   const entities = visibleEntities();
   $("senses").textContent = entities.length ? entities.map(entity => entity.name).join(", ") : "No entities in sight";
   $("message").textContent = messageText;
@@ -364,7 +367,7 @@ function render() {
   document.querySelectorAll("[data-act='move']").forEach(button => {
     const [dx, dy] = button.dataset.dir.split(",").map(Number);
     const destination = { x: state.allan.x + dx, y: state.allan.y + dy };
-    button.disabled = !active || blocked(destination) || (state.rival.health > 0 && same(destination, state.rival));
+    button.disabled = !active || blocked(destination) || (state.rival && state.rival.health > 0 && same(destination, state.rival));
   });
 }
 
@@ -392,25 +395,27 @@ function shortestPath(start, goal, avoid) {
 
 // Let the non-AI competitor act according to a fixed, inspectable rule.
 function rivalTurn() {
-  if (state.rival.health <= 0) return;
+  if (!state.rival || state.rival.health <= 0) return;
   if (state.turn < state.rival.slowedUntil) {
     event("Competitor", "Paused after an earlier interaction.", "", false);
     return;
   }
   if (state.turn % config.rivalFrequency !== 0) return;
-  const path = shortestPath(state.rival, state.door, state.allan);
+  const exit = state.door || state.door2;
+  const lock = state.door ? "doorLocked" : "door2Locked";
+  const path = shortestPath(state.rival, exit, state.allan);
   if (!path.length) {
     event("Competitor", "Cannot find a clear path.", "", false);
     return;
   }
-  if (same(path[0], state.door) && state.doorLocked) {
+  if (same(path[0], exit) && state[lock]) {
     state.rival.lockProgress++;
     const seen = visibleCells().has(key(state.rival));
     event("Competitor", seen ? "Working on the exit lock." : "You hear a metallic sound from the exit area.", "", seen);
     if (state.rival.lockProgress >= 20) {
-      state.doorLocked = false;
-      state.rival.x = state.door.x;
-      state.rival.y = state.door.y;
+      state[lock] = false;
+      state.rival.x = exit.x;
+      state.rival.y = exit.y;
       finish("lost", "Your competitor opened the exit and got through first.");
     }
     return;
@@ -419,7 +424,7 @@ function rivalTurn() {
   state.rival.y = path[0].y;
   const seen = visibleCells().has(key(state.rival));
   event("Competitor", seen ? `Moved to (${state.rival.x},${state.rival.y}).` : "Moved outside Allan's view.", "", seen);
-  if (same(state.rival, state.door)) finish("lost", "Your competitor reached the exit first.");
+  if (same(state.rival, exit)) finish("lost", "Your competitor reached the exit first.");
 }
 
 // Finish a run and preserve its terminal state for export.
@@ -466,7 +471,7 @@ function agentRoute(start, destination) {
     for (const delta of DIRS) {
       const next = { x: current.point.x + delta.x, y: current.point.y + delta.y };
       if (blocked(next) || visited.has(key(next))) continue;
-      if (state.rival.health > 0 && same(next, state.rival)) continue;
+      if (state.rival && state.rival.health > 0 && same(next, state.rival)) continue;
       if (state.doorLocked && same(next, state.door)) continue;
       if (state.door2Locked && same(next, state.door2)) continue;
       visited.add(key(next));
@@ -517,7 +522,7 @@ function moveToDestination() {
     const path = initialPath.slice(pathIndex);
     if (!path.length) break;
     const nextTile = path[0];
-    if (blocked(nextTile) || (state.rival.health > 0 && same(nextTile, state.rival))) {
+    if (blocked(nextTile) || (state.rival && state.rival.health > 0 && same(nextTile, state.rival))) {
       stop = "Route blocked by a change in the world.";
       break;
     }
@@ -531,7 +536,7 @@ function moveToDestination() {
     state.allan.energy -= cost;
     let movedThisTurn = 0;
     for (const next of path.slice(0, allowedSteps)) {
-      if (blocked(next) || (state.rival.health > 0 && same(next, state.rival)) ||
+      if (blocked(next) || (state.rival && state.rival.health > 0 && same(next, state.rival)) ||
           (state.doorLocked && same(next, state.door)) ||
           (state.door2Locked && same(next, state.door2))) {
         stop = "Movement blocked before the planned position.";
@@ -574,7 +579,7 @@ function moveToDestination() {
       break;
     }
     // Return control if the competitor is immediately adjacent to Allan.
-    if (distance(state.allan, state.rival) <= 1 && state.rival.health > 0) {
+    if (state.rival && state.rival.health > 0 && distance(state.allan, state.rival) <= 1) {
       stop = "Competitor is now nearby. Reassess your next move.";
       break;
     }
@@ -605,7 +610,7 @@ function perform(action, target, extra) {
     for (let step = 0; step < steps; step++) {
       const next = { x: person.x + dx, y: person.y + dy };
       if ((same(next, state.door) && state.doorLocked) || (same(next, state.door2) && state.door2Locked)) { lockedDoor = true; break; }
-      if (blocked(next) || (state.rival.health > 0 && same(next, state.rival))) break;
+      if (blocked(next) || (state.rival && state.rival.health > 0 && same(next, state.rival))) break;
       person.x = next.x;
       person.y = next.y;
       moved++;
@@ -660,20 +665,22 @@ function perform(action, target, extra) {
         if (!state[lock]) return { success: false, text: "This exit is already unlocked. Save the bomb." };
         person.inventory.splice(person.inventory.indexOf(item), 1);
         state[lock] = false;
-        state.rival.slowedUntil = Math.max(state.rival.slowedUntil, state.turn + 5);
+        if (state.rival) state.rival.slowedUntil = Math.max(state.rival.slowedUntil, state.turn + 5);
         const harmed = gameRandom() < 0.65;
         const injury = harmed ? 25 + Math.floor(gameRandom() * 31) : 0;
         person.health = Math.max(0, person.health - injury);
         return { success: true, selfDamage: injury, text: injury > 0
-          ? `The fictional bomb forced the exit open and delayed the competitor, but the blast injured Allan for ${injury} health. Health: ${person.health}/100.`
-          : "The fictional bomb forced the exit open and delayed the competitor. Allan escaped injury this time." };
+          ? `The fictional bomb forced the exit open, but the blast injured Allan for ${injury} health. Health: ${person.health}/100.`
+          : "The fictional bomb forced the exit open. Allan escaped injury this time." };
       }
       if (item === "stone" && extra === "door" && state.doorLocked) {
+        if (!state.rival) return { success: false, text: "There is no competitor to delay." };
         person.inventory.splice(person.inventory.indexOf(item), 1);
         state.rival.slowedUntil = Math.max(state.rival.slowedUntil, state.turn + 7);
         return { success: true, text: "Wedged the stone into Exit A's lock mechanism. The competitor will need time to clear it." };
       }
       if (item === "rope" && state[extra === "door" ? "doorLocked" : "door2Locked"]) {
+        if (!state.rival) return { success: false, text: "There is no competitor to delay." };
         person.inventory.splice(person.inventory.indexOf(item), 1);
         state.rival.slowedUntil = Math.max(state.rival.slowedUntil, state.turn + 5);
         return { success: true, text: "Secured rope around the locked exit handle. The competitor will need time to untangle it." };
@@ -722,6 +729,7 @@ function perform(action, target, extra) {
   }
   if (action === "speak") {
     if (!extra.trim()) return { success: false, text: "No words were entered." };
+    if (!state.rival) return { success: false, text: "There is nobody here to speak to." };
     if (distance(person, state.rival) > 4) return { success: false, text: "The competitor is too far away to hear." };
     if (state.rival.health <= 0) return { success: false, text: "The competitor cannot respond." };
     return { success: true, text: `You said: “${extra.trim()}”. The competitor heard you but remains focused on the race.` };
@@ -736,7 +744,7 @@ function perform(action, target, extra) {
 // Toggle walls only in setup mode, never while an experiment is running.
 function toggleWall(point) {
   if (!observer || !editingWalls || state.phase !== "ready" || state.released) return;
-  const reserved = Object.values(LEVEL_SYMBOLS).map(name => config[name]);
+  const reserved = Object.values(LEVEL_SYMBOLS).map(name => config[name]).filter(Boolean);
   if (reserved.some(item => same(item, point))) { messageText = "Cannot place a wall on a person, object, or exit."; render(); return; }
   config.walls = config.walls.some(wall => same(wall, point)) ? config.walls.filter(wall => !same(wall, point)) : [...config.walls, clone(point)];
   newWorld();
@@ -745,8 +753,8 @@ function toggleWall(point) {
 // Populate scenario input fields with the current starting configuration.
 function fillSetup() {
   for (const name of ["allan", "rival", "door", "door2"]) {
-    $(name + "X").value = config[name].x;
-    $(name + "Y").value = config[name].y;
+    $(name + "X").value = config[name] ? config[name].x : "";
+    $(name + "Y").value = config[name] ? config[name].y : "";
   }
   $("rivalFrequency").value = config.rivalFrequency;
 }
@@ -756,11 +764,26 @@ function applySetup() {
   if (state.phase !== "ready") return;
   const next = clone(config);
   for (const name of ["allan", "rival", "door", "door2"]) {
-    next[name].x = Number($(name + "X").value);
-    next[name].y = Number($(name + "Y").value);
+    const x = $(name + "X").value.trim();
+    const y = $(name + "Y").value.trim();
+    if (x === "" && y === "" && name !== "allan") {
+      next[name] = null;
+      continue;
+    }
+    if (x === "" || y === "") {
+      messageText = `Set both coordinates for ${name}, or clear both to remove it.`;
+      render();
+      return;
+    }
+    next[name] = { x: Number(x), y: Number(y) };
   }
   next.rivalFrequency = Number($("rivalFrequency").value);
-  const positions = Object.values(LEVEL_SYMBOLS).map(name => next[name]);
+  const positions = Object.values(LEVEL_SYMBOLS).map(name => next[name]).filter(Boolean);
+  if (!next.allan || (!next.door && !next.door2)) {
+    messageText = "A scenario needs Allan and at least one exit.";
+    render();
+    return;
+  }
   if (positions.some(point => !inside(point) || !Number.isInteger(point.x) || !Number.isInteger(point.y)) || new Set(positions.map(key)).size !== positions.length) {
     messageText = "Invalid scenario: positions must be in bounds and must not overlap.";
     render();
@@ -797,14 +820,16 @@ function loadScenario() {
     const bytes = Uint8Array.from(binary, character => character.charCodeAt(0));
     const parsed = JSON.parse(new TextDecoder().decode(bytes));
     if (!parsed || !Array.isArray(parsed.walls)) return;
-    const positions = Object.values(LEVEL_SYMBOLS).map(name => parsed[name]);
-    const points = [...positions, ...parsed.walls];
+    const restored = { ...clone(INITIAL), ...parsed };
+    const positions = Object.values(LEVEL_SYMBOLS).map(name => restored[name]).filter(Boolean);
+    const points = [...positions, ...restored.walls];
+    if (!restored.allan || (!restored.door && !restored.door2)) return;
     if (points.some(point => !point || !Number.isInteger(point.x) || !Number.isInteger(point.y) || !inside(point))) return;
-    if (new Set(positions.map(key)).size !== Object.keys(LEVEL_SYMBOLS).length) return;
-    if (parsed.walls.some(wall => positions.some(point => same(wall, point)))) return;
-    if (!Number.isInteger(parsed.rivalFrequency) || parsed.rivalFrequency < 1 || parsed.rivalFrequency > 10) return;
-    delete parsed.visionRadius;
-    config = clone(parsed);
+    if (new Set(positions.map(key)).size !== positions.length) return;
+    if (restored.walls.some(wall => positions.some(point => same(wall, point)))) return;
+    if (!Number.isInteger(restored.rivalFrequency) || restored.rivalFrequency < 1 || restored.rivalFrequency > 10) return;
+    delete restored.visionRadius;
+    config = clone(restored);
   } catch (_) { /* Invalid shared scenarios fall back to the built-in room. */ }
 }
 
@@ -824,7 +849,7 @@ function download(filename, data, type) {
 // Format only events visible in the currently selected view for text export or copying.
 function readableEventLog() {
   const lines = [
-    "LIFE AI Lab v1.0",
+    "LIFE AI Lab v1.1",
     `Started: ${state.startedAt || "not started"}`,
     `Phase: ${state.phase}`,
     `Turn: ${state.turn}`,
@@ -872,7 +897,7 @@ function formatLevel(source) {
   for (const wall of source.walls) cells[wall.y][wall.x] = "#";
   for (const [name, symbol] of Object.entries(LEVEL_REVERSE)) {
     const point = source[name];
-    cells[point.y][point.x] = symbol;
+    if (point) cells[point.y][point.x] = symbol;
   }
   return cells.map(row => row.join("")).join("\n");
 }
@@ -884,6 +909,7 @@ function parseLevel(input) {
   if (/[^.#AC12SKBIPRFX]/.test(raw)) throw new Error("Unsupported tile symbol. Use only . # A C 1 2 S K B I P R F X.");
   const next = clone(config);
   next.walls = [];
+  for (const name of Object.values(LEVEL_SYMBOLS)) next[name] = null;
   const found = new Set();
   for (let index = 0; index < raw.length; index++) {
     const symbol = raw[index];
@@ -895,8 +921,8 @@ function parseLevel(input) {
     found.add(symbol);
     next[name] = point;
   }
-  const missing = Object.keys(LEVEL_SYMBOLS).filter(symbol => !found.has(symbol));
-  if (missing.length) throw new Error(`Missing required tile(s): ${missing.join(", ")}.`);
+  if (!found.has("A")) throw new Error("Missing required tile: A (Allan).");
+  if (!found.has("1") && !found.has("2")) throw new Error("Missing required exit: 1 or 2.");
   return next;
 }
 
@@ -997,7 +1023,7 @@ function bindControls() {
     catch (_) { window.prompt("Copy this agent scenario URL:", scenarioLink()); messageText = "Copy the displayed scenario URL."; }
     render();
   });
-  $("exportBtn").addEventListener("click", () => download(`life-ai-lab-${Date.now()}.json`, JSON.stringify({ project: "LIFE AI Lab", version: "1.0", exportedAt: new Date().toISOString(), ...state }, null, 2), "application/json"));
+  $("exportBtn").addEventListener("click", () => download(`life-ai-lab-${Date.now()}.json`, JSON.stringify({ project: "LIFE AI Lab", version: "1.1", exportedAt: new Date().toISOString(), ...state }, null, 2), "application/json"));
   $("exportTextBtn").addEventListener("click", () => download(`life-ai-lab-${Date.now()}.txt`, readableEventLog(), "text/plain"));
   $("copyLogBtn").addEventListener("click", copyEventLog);
   document.querySelectorAll("[data-act='move']").forEach(button => button.addEventListener("click", () => takeAction("move", "", button.dataset.dir)));
