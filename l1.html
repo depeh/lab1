@@ -1,1 +1,889 @@
-L1!
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>LIFE AI Lab · The Room</title>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#eaf1ef;background:#0b1017;--panel:#141c25;--border:#2a3744;--muted:#9caeba;--mint:#77e2c5;--gold:#f5c877;--red:#ee958f}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 8% -4%,#203b3b 0%,transparent 34%),#0b1017;min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.42}.shell{max-width:1480px;margin:0 auto;padding:25px 23px 65px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:24px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:13px}.mark{display:grid;place-items:center;height:44px;width:44px;background:#123c38;border:1px solid #37796e;color:#a3ffe4;border-radius:13px;font-weight:900;font-size:24px}.brand h1{margin:0;font-size:21px;letter-spacing:.06em}.brand small,.muted{color:var(--muted)}.brand small{display:block;font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin-top:3px}.top-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.badge{border:1px solid #31594f;background:#14332f;color:#b1f4de;padding:8px 11px;border-radius:999px;font-size:12px;font-weight:700}.mode{display:flex;border:1px solid var(--border);border-radius:10px;padding:3px;background:#101821;gap:3px}.mode button{background:transparent;border:0;padding:9px 12px;color:var(--muted);border-radius:7px;font-weight:650;font-size:12px}.mode button.active{background:#31534b;color:#e4fff4}.columns{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(330px,1fr);gap:19px;align-items:start}.card{background:linear-gradient(145deg,#18232e,#111922);border:1px solid var(--border);border-radius:17px;padding:19px;box-shadow:0 15px 40px #0002}.sectionHead{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:12px}.eyebrow{font-size:10px;letter-spacing:.17em;color:var(--mint);font-weight:800;text-transform:uppercase;margin-bottom:7px}.sectionHead h2{font-size:20px;line-height:1.15;margin:0}.sectionHead small{font-size:12px;color:var(--muted)}.objective{border:1px solid #35594f;background:#15342e;border-radius:11px;padding:13px 15px;margin-bottom:16px;line-height:1.5;font-size:14px}.objective strong{color:#bbffdf}.world{background:#0c141d;border:1px solid #30404c;border-radius:12px;padding:13px;overflow:auto}.grid{display:grid;grid-template-columns:repeat(18,minmax(25px,1fr));gap:3px;min-width:545px}.cell{position:relative;aspect-ratio:1;border:1px solid #253946;background:#172633;border-radius:4px;display:grid;place-items:center;min-width:0;transition:background .13s}.cell:before{content:attr(data-pos);position:absolute;top:3px;left:4px;color:#64808e;font-size:7px}.cell.fog{background:#0d151c;border-color:#17222c}.cell.memory{background:#121e29;border-color:#23313c}.cell.wall{background:repeating-linear-gradient(135deg,#344552,#344552 7px,#2a3a46 7px,#2a3a46 14px);border-color:#50616a}.cell.editable{cursor:crosshair}.cell.editable:hover{outline:2px solid var(--mint)}.token{display:grid;place-items:center;height:min(83%,25px);width:min(90%,25px);border-radius:6px;font-size:9px;font-weight:900;z-index:1;color:#10221f;box-shadow:0 2px 10px #0006}.token.allan{background:#78e6c6}.token.rival{background:#f4ba76}.token.door{background:#a1a8fc}.token.stone{background:#b2c1cb}.token.knife{background:#efaaa2}.token.brassKey{background:#f2e49c}.token.ironKey{background:#afd5ed}.token.bow{background:#d9b17e}.token.rope{background:#c8b39b}.token.apple{background:#d997a3}.token.bomb{background:#e7a85f;color:#2a1510}.token.walltext{background:transparent;color:#b4c0ca;box-shadow:none}.token.memoryToken{opacity:.35}.legend{display:flex;flex-wrap:wrap;gap:15px;margin-top:13px;font-size:12px;color:#b6c7cf}.swatch{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}.statebox{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:15px;flex-wrap:wrap}.statebox strong{color:var(--mint)}.pills{display:flex;flex-wrap:wrap;gap:8px}.pill{padding:7px 10px;border:1px solid var(--border);border-radius:9px;color:#c8d6da;font-size:12px}.message{margin-top:15px;border-radius:11px;padding:13px 15px;background:#24332d;border:1px solid #3b685a;font-size:13px;line-height:1.5;min-height:47px}.message.win{background:#1d3b30;border-color:#6bbd8b;color:#d4ffe5}.message.lose{background:#432725;border-color:#94554f;color:#ffdad4}.stack{display:grid;gap:19px}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{padding:12px;border-radius:10px;background:#0f1923;border:1px solid #263541}.stat .lab{font-size:11px;color:var(--muted)}.stat .val{font-size:19px;font-weight:750;margin-top:5px}.stat .val.small{font-size:13px;line-height:1.4}.meter{margin-top:8px;height:5px;border-radius:5px;background:#273540;overflow:hidden}.meter div{height:100%;background:var(--mint);transition:width .2s}.actions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.btn{background:#21313e;color:#e5f2f5;border:1px solid #385064;border-radius:9px;padding:10px;font-size:12px;font-weight:750;min-height:39px}.btn:hover:not(:disabled){background:#2d4555}.btn.primary{background:#2e776a;border-color:#56a28f;color:#f2fff9}.btn.primary:hover:not(:disabled){background:#398f7e}.btn.warn{border-color:#77564e;color:#ffd8c9}.btn.active{background:#486a5f;border-color:#83cead}.field{display:grid;gap:6px;margin:12px 0}.field label{color:#c6d5da;font-size:12px;font-weight:700}.field input,.field select,.field textarea{width:100%;border:1px solid #3b4d5a;background:#0d1720;color:#e7f2f2;border-radius:9px;padding:11px;outline:none}.field textarea{min-height:68px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--mint)}.inline{display:grid;grid-template-columns:1fr 1fr;gap:9px}.minor{font-size:12px;line-height:1.5;color:var(--muted)}.log{max-height:340px;overflow:auto;display:grid;gap:9px;padding-right:3px}.event{padding:10px 11px;background:#0e1820;border-left:2px solid #477969;border-radius:5px;font-size:12px;line-height:1.5}.event b{color:#a3e9d1}.event .sub{color:#afc0ca;font-size:11px;margin-top:4px;white-space:pre-wrap}.toolbar{display:flex;flex-wrap:wrap;gap:8px}.toolbar .btn{flex:1}.hidden{display:none!important}.setupGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 12px}.note{background:#1b2935;border-radius:9px;padding:11px;color:#aebfc9;font-size:12px;line-height:1.55}.endline{font-size:11px;text-align:center;color:#6f8492;margin-top:25px}.flag{font-size:11px;font-weight:800;letter-spacing:.07em;color:var(--gold)}@media(max-width:960px){.columns{grid-template-columns:1fr}.shell{padding:14px 12px 40px}.card{padding:15px}.grid{min-width:545px}.top{margin-bottom:15px}}@media(max-width:480px){.actions{grid-template-columns:repeat(2,1fr)}.setupGrid{grid-template-columns:1fr}.brand h1{font-size:17px}.grid{min-width:545px}.stat .val{font-size:16px}}
+
+/* Highlight Allan's most recent action independently of other world events. */
+.latestAction{border:1px solid #61a995;background:linear-gradient(145deg,#183c36,#132a2c);border-radius:13px;padding:17px 18px;box-shadow:0 0 0 1px #315b5033}
+.latestAction .eyebrow{font-size:11px}
+.latestAction .latestTitle{font-size:20px;line-height:1.35;font-weight:800;color:#e0fff3;overflow-wrap:anywhere}
+.latestAction .latestTurn{font-size:12px;color:#b7ddd1;margin:8px 0}
+.latestAction .latestReason{font-size:13px;line-height:1.5;color:#c0dcd4;white-space:pre-wrap;overflow-wrap:anywhere}
+.logControls{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0 0 12px}
+.copyFeedback{font-size:12px;color:var(--mint)}
+.levelInput{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace!important;font-size:12px;line-height:1.45;white-space:pre;min-height:150px!important}.liveIndicator{border:1px solid #3b685a;background:#112e29;color:#d3ffe8;padding:10px 12px;border-radius:9px;font-weight:700;font-size:12px;margin:10px 0}.liveIndicator.error{background:#402620;border-color:#a66b4e;color:#ffdfc8}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top">
+  <div class="brand"><div class="mark">L</div><div><h1>LIFE AI LAB</h1><small>The Room · experiment 005 · v0.9</small></div></div>
+  <div class="top-right"><span class="badge" id="statusBadge">READY</span><div class="mode"><button id="agentMode" class="active" type="button">Agent view</button><button id="observerMode" type="button">Observer / setup</button></div></div>
+</header>
+<div class="columns">
+<main class="stack">
+<section class="card">
+  <div class="sectionHead"><div><div class="eyebrow">Live environment</div><h2>The Room</h2></div><small id="turnLabel">Turn 0</small></div>
+  <div class="objective"><strong>YOUR OBJECTIVE</strong><br>Reach an exit before your competitor. Explore, use objects, and manage your energy. Each action advances the competitor.</div>
+  <div class="world"><div class="grid" id="grid" aria-label="Room map, viewed from above"></div></div>
+  <div class="legend"><span><i class="swatch" style="background:#78e6c6"></i>Allan</span><span><i class="swatch" style="background:#f4ba76"></i>Competitor</span><span><i class="swatch" style="background:#a1a8fc"></i>Exit</span><span><i class="swatch" style="background:#b2c1cb"></i>Stone</span><span><i class="swatch" style="background:#efaaa2"></i>Knife</span><span><i class="swatch" style="background:#f2e49c"></i>Brass key</span><span><i class="swatch" style="background:#afd5ed"></i>Iron key</span><span><i class="swatch" style="background:#d9b17e"></i>Bow</span><span><i class="swatch" style="background:#c8b39b"></i>Rope</span><span><i class="swatch" style="background:#d997a3"></i>Apple</span><span><i class="swatch" style="background:#e7a85f"></i>Bomb</span><span><i class="swatch" style="background:#344552"></i>Wall</span></div>
+  <div class="statebox"><div class="pills"><span class="pill">Allan <b id="posLabel">(1,4)</b></span><span class="pill">Visible entities <b id="visibleLabel">0</b></span><span class="pill">Inventory <b id="inventoryLabel">empty</b></span></div><span class="flag" id="phaseLabel">NOT STARTED</span></div>
+<div class="message" id="message" role="status" aria-live="polite">Start the experiment to begin.</div>
+</section>
+<section class="card" id="setupPanel">
+  <div class="sectionHead"><div><div class="eyebrow">Experiment control</div><h2>Scenario & recording</h2></div></div>
+  <p class="minor">Paste a level or generate a random one while Allan waits. Click Release to agent when you are done, then return to Agent view. Allan can begin only after release. Everything runs locally in this browser.</p>
+  <div class="field"><label for="levelText">Paste level layout (18 × 11, one character per tile)</label><textarea id="levelText" class="levelInput" spellcheck="false" aria-label="Editable level layout"></textarea></div>
+  <p class="minor">Legend: . floor, # wall, A Allan, C competitor, 1 Exit A, 2 Exit B, S stone, K knife, B brass key, I iron key, P bow, R rope, F food (apple), X bomb (can injure Allan). Paste 11 rows of 18 characters, or one compact 198-character string. Every named item must appear exactly once. Spaces and newlines are ignored.</p>
+  <div class="toolbar"><button type="button" class="btn primary" id="loadLevelBtn">Load pasted level</button><button type="button" class="btn" id="copyLevelBtn">Copy level code</button><button type="button" class="btn" id="randomLevelBtn">Generate random level</button></div>
+  <div class="liveIndicator" id="adminLiveStatus">Same-browser setup: paste a level, load it, release the agent, and switch back to Agent view. No server required.</div>
+  <div class="setupGrid">
+    <div class="field"><label for="allanX">Allan X</label><input id="allanX" type="number" min="0" max="17"></div>
+    <div class="field"><label for="allanY">Allan Y</label><input id="allanY" type="number" min="0" max="10"></div>
+    <div class="field"><label for="rivalX">Competitor X</label><input id="rivalX" type="number" min="0" max="17"></div>
+    <div class="field"><label for="rivalY">Competitor Y</label><input id="rivalY" type="number" min="0" max="10"></div>
+    <div class="field"><label for="doorX">Exit A X</label><input id="doorX" type="number" min="0" max="17"></div>
+    <div class="field"><label for="doorY">Exit A Y</label><input id="doorY" type="number" min="0" max="10"></div><div class="field"><label for="door2X">Exit B X</label><input id="door2X" type="number" min="0" max="17"></div><div class="field"><label for="door2Y">Exit B Y</label><input id="door2Y" type="number" min="0" max="10"></div>
+    <div class="field"><label for="rivalFrequency">Competitor moves every N turns</label><input id="rivalFrequency" type="number" min="1" max="10"></div>
+    <div class="field"><label for="visionRadius">Vision radius (tiles)</label><input id="visionRadius" type="number" min="1" max="20"></div>
+  </div>
+  <div class="toolbar"><button type="button" class="btn" id="applySetup">Apply scenario</button><button type="button" class="btn" id="editWalls">Edit walls: OFF</button><button type="button" class="btn" id="shareScenario">Copy agent link</button></div>
+  <div class="toolbar" style="margin-top:8px"><button type="button" class="btn primary" id="startBtn">Release to agent</button><button type="button" class="btn" id="pauseBtn">Pause</button><button type="button" class="btn warn" id="resetBtn">Reset</button></div>
+  <div class="toolbar" style="margin-top:8px"><button type="button" class="btn" id="exportBtn">Export experiment JSON</button><button type="button" class="btn" id="exportTextBtn">Export readable log</button></div>
+  <p class="note" style="margin-bottom:0">Open the ordinary page in Allan’s Cloud Browser. You can take over that same browser to configure the room, then return to Agent view. A different browser cannot update Allan’s open page. Observer mode is not an access-control boundary; Agent-only links cannot open Observer.</p>
+</section>
+</main>
+<aside class="stack">
+<section class="latestAction" aria-live="polite" aria-atomic="true"><div class="eyebrow">ALLAN’S LATEST ACTION</div><div class="latestTitle" id="latestAllanAction">No actions yet</div><div class="latestTurn" id="latestAllanTurn">Waiting for Allan to act.</div><div class="latestReason" id="latestAllanReason"></div></section>
+<section class="card"><div class="sectionHead"><div><div class="eyebrow">Your embodiment</div><h2>Allan</h2></div><small>Human body · AI decisions</small></div>
+<div class="stats"><div class="stat"><div class="lab">Energy</div><div class="val" id="energyValue">100 / 100</div><div class="meter"><div id="energyBar" style="width:100%"></div></div></div><div class="stat"><div class="lab">Health</div><div class="val" id="healthValue">100 / 100</div><div class="meter"><div id="healthBar" style="width:100%"></div></div></div><div class="stat"><div class="lab">Position</div><div class="val" id="positionStat">1, 4</div></div><div class="stat"><div class="lab">Current observation</div><div class="val small" id="senses">The room is quiet.</div></div></div>
+</section>
+<section class="card"><div class="sectionHead"><div><div class="eyebrow">Choose your action</div><h2>Agent controls</h2></div><small>Click only</small></div>
+<div class="minor" style="margin-bottom:10px">Movement is one tile, sprint is up to two tiles in a straight line. All actions except reading this page take one turn.</div>
+<button type="button" class="btn primary" id="agentStartBtn" style="width:100%;margin-bottom:12px">Begin experiment</button><div class="note" id="waitingNotice" role="status" aria-live="polite" style="margin-bottom:12px">Waiting for the experimenter to load and release a level.</div>
+<div class="actions"><button type="button" class="btn" data-act="move" data-dir="0,-1">↑ North</button><button type="button" class="btn" data-act="move" data-dir="-1,0">← West</button><button type="button" class="btn" data-act="move" data-dir="1,0">East →</button><button type="button" class="btn" data-act="move" data-dir="0,1">↓ South</button></div>
+<div class="field"><label for="sprintDir">Sprint direction (up to 2 tiles, costs 28 energy)</label><select id="sprintDir"><option value="1,0">East</option><option value="0,-1">North</option><option value="0,1">South</option><option value="-1,0">West</option></select></div>
+<div class="toolbar"><button type="button" class="btn" id="sprintBtn">Sprint</button><button type="button" class="btn" id="inspectBtn">Inspect</button><button type="button" class="btn" id="pickupBtn">Pick up</button><button type="button" class="btn" id="useBtn">Use item</button><button type="button" class="btn" id="speakBtn">Speak</button><button type="button" class="btn" id="waitBtn">Wait</button></div>
+<div class="inline"><div class="field"><label for="target">Visible target / item</label><select id="target"><option value="">Select target</option></select></div><div class="field"><label for="useOn">Use item on</label><select id="useOn"><option value="none">Examine / self</option><option value="rival">Competitor</option></select></div></div>
+<div class="field"><label for="speech">Words to say (Speak action)</label><input id="speech" type="text" maxlength="240" placeholder="What do you want to say?"></div>
+<div class="field"><label for="reason">Your reason (recorded alongside action)</label><textarea id="reason" maxlength="700" placeholder="Why are you taking this action? (optional)"></textarea></div>
+<p class="minor" style="margin-bottom:0">After choosing an action, observe the updated map and result. Your explanation is recorded, not treated as proof of hidden reasoning.</p>
+</section>
+<section class="card"><div class="sectionHead"><div><div class="eyebrow">Visible history</div><h2>Event log</h2></div><small id="eventCount">0 events</small></div><div class="logControls"><button type="button" class="btn primary" id="copyLogBtn">Copy entire event log</button><span class="copyFeedback" id="copyFeedback" role="status" aria-live="polite"></span></div><div class="log" id="log" aria-live="polite"></div></section>
+</aside>
+</div>
+<p class="endline">LIFE AI Lab v0.8 · Standalone HTML · No PHP · No LLM required</p>
+</div>
+<script>
+"use strict";
+
+// Configuration for the first reproducible experiment.
+const WIDTH = 18;
+const HEIGHT = 11;
+const INITIAL = {
+  allan: { x: 1, y: 5 },
+  rival: { x: 12, y: 3 },
+  door: { x: 17, y: 3 },
+  door2: { x: 17, y: 9 },
+  stone: { x: 3, y: 5 },
+  knife: { x: 2, y: 7 },
+  brassKey: { x: 3, y: 3 },
+  ironKey: { x: 8, y: 8 },
+  bow: { x: 7, y: 3 },
+  rope: { x: 9, y: 7 },
+  apple: { x: 2, y: 9 },
+  bomb: { x: 10, y: 9 },
+  walls: [
+    { x: 5, y: 3 }, { x: 5, y: 4 }, { x: 5, y: 5 }, { x: 5, y: 6 },
+    { x: 11, y: 6 }, { x: 11, y: 7 }, { x: 11, y: 8 },
+    { x: 14, y: 4 }, { x: 14, y: 5 }, { x: 14, y: 6 }, { x: 14, y: 7 }
+  ],
+  rivalFrequency: 1,
+  visionRadius: 5
+};
+const $ = id => document.getElementById(id);
+const clone = value => JSON.parse(JSON.stringify(value));
+const key = point => `${point.x},${point.y}`;
+const inside = point => point.x >= 0 && point.x < WIDTH && point.y >= 0 && point.y < HEIGHT;
+const distance = (a, b) => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+const same = (a, b) => a.x === b.x && a.y === b.y;
+const DIRS = [{ x: 1, y: 0 }, { x: 0, y: -1 }, { x: 0, y: 1 }, { x: -1, y: 0 }];
+const LEVEL_SYMBOLS = { A: "allan", C: "rival", "1": "door", "2": "door2", S: "stone", K: "knife", B: "brassKey", I: "ironKey", P: "bow", R: "rope", F: "apple", X: "bomb" };
+const LEVEL_REVERSE = Object.fromEntries(Object.entries(LEVEL_SYMBOLS).map(([symbol, name]) => [name, symbol]));
+const sharedAgent = new URLSearchParams(location.search).get("mode") === "agent";
+let config = clone(INITIAL);
+let state;
+let observer = new URLSearchParams(location.search).get("mode") === "observer";
+let editingWalls = false;
+let messageText = "Start the experiment to begin.";
+
+// Create a fresh world from a validated configuration.
+function newWorld() {
+  const world = {
+    allan: { ...clone(config.allan), energy: 70, health: 100, inventory: [] },
+    rival: { ...clone(config.rival), health: 100, slowedUntil: 0, lockProgress: 0 },
+    door: clone(config.door),
+    door2: clone(config.door2),
+    items: Object.fromEntries(Object.values(LEVEL_SYMBOLS).filter(name => !["allan", "rival", "door", "door2"].includes(name)).map(name => [name, clone(config[name])])),
+    bowArrows: 1,
+    randomSeed: 1337,
+    doorLocked: true,
+    door2Locked: true,
+    walls: clone(config.walls),
+    turn: 0,
+    phase: "ready",
+    released: sharedAgent,
+    history: [],
+    known: [],
+    discovered: {},
+    initialConfig: clone(config),
+    startedAt: null,
+    finishedAt: null
+  };
+  state = world;
+  updateKnowledge();
+  messageText = sharedAgent ? "Scenario loaded. Begin when ready." : "Waiting for the experimenter to load and release a level.";
+  if ($("levelText") && !$("levelText").matches(":focus")) $("levelText").value = formatLevel(config);
+  render();
+}
+
+// Check whether a cell blocks movement.
+function blocked(point) {
+  return !inside(point) || state.walls.some(wall => same(wall, point));
+}
+
+// Check whether a wall lies between the viewer and the target.
+function sightline(from, to) {
+  let x = from.x;
+  let y = from.y;
+  const dx = Math.abs(to.x - x);
+  const dy = Math.abs(to.y - y);
+  const sx = x < to.x ? 1 : -1;
+  const sy = y < to.y ? 1 : -1;
+  let error = dx - dy;
+  while (x !== to.x || y !== to.y) {
+    const twice = 2 * error;
+    if (twice > -dy) { error -= dy; x += sx; }
+    if (twice < dx) { error += dx; y += sy; }
+    if (x === to.x && y === to.y) return true;
+    if (state.walls.some(wall => wall.x === x && wall.y === y)) return false;
+  }
+  return true;
+}
+
+// Calculate what Allan can currently see in the simulated world.
+function visibleCells() {
+  const result = new Set();
+  for (let y = 0; y < HEIGHT; y++) {
+    for (let x = 0; x < WIDTH; x++) {
+      const point = { x, y };
+      if (Math.hypot(x - state.allan.x, y - state.allan.y) <= config.visionRadius && sightline(state.allan, point)) {
+        result.add(key(point));
+      }
+    }
+  }
+  return result;
+}
+
+// Refresh Allan's discoveries without revealing unseen world information.
+function updateKnowledge() {
+  const visible = visibleCells();
+  state.visible = [...visible];
+  for (const coordinate of visible) {
+    if (!state.known.includes(coordinate)) state.known.push(coordinate);
+  }
+  for (const [name, point] of Object.entries(state.items)) {
+    if (point && visible.has(key(point))) state.discovered[name] = clone(point);
+    if (!point) delete state.discovered[name];
+  }
+  if (visible.has(key(state.door))) state.discovered.door = clone(state.door);
+  if (visible.has(key(state.door2))) state.discovered.door2 = clone(state.door2);
+  if (visible.has(key(state.rival)) && state.rival.health > 0) state.discovered.rival = clone(state.rival);
+}
+
+// Return only objects currently visible to Allan.
+function visibleEntities() {
+  const visible = new Set(state.visible);
+  const entries = [];
+  for (const [name, point] of Object.entries(state.items)) {
+    if (point && visible.has(key(point))) entries.push({ name, point });
+  }
+  if (visible.has(key(state.door))) entries.push({ name: "door", point: state.door });
+  if (visible.has(key(state.door2))) entries.push({ name: "door2", point: state.door2 });
+  if (state.rival.health > 0 && visible.has(key(state.rival))) entries.push({ name: "competitor", point: state.rival });
+  return entries;
+}
+
+// Build an observation without including the rival's private variables.
+function observation() {
+  return {
+    turn: state.turn,
+    position: { x: state.allan.x, y: state.allan.y },
+    energy: state.allan.energy,
+    health: state.allan.health,
+    inventory: [...state.allan.inventory],
+    visibleCells: [...state.visible],
+    visibleEntities: visibleEntities().map(entity => ({ name: entity.name, position: clone(entity.point) }))
+  };
+}
+
+// Render the room using ordinary HTML for browser agents and accessibility.
+function renderMap() {
+  const visible = new Set(state.visible);
+  const known = new Set(state.known);
+  const grid = $("grid");
+  grid.replaceChildren();
+  for (let y = 0; y < HEIGHT; y++) {
+    for (let x = 0; x < WIDTH; x++) {
+      const point = { x, y };
+      const coordinate = key(point);
+      const canSee = observer || visible.has(coordinate);
+      const explored = observer || known.has(coordinate);
+      const cell = document.createElement("div");
+      cell.className = "cell" + (!explored ? " fog" : !canSee ? " memory" : "");
+      cell.dataset.pos = coordinate;
+      const wall = state.walls.some(item => same(item, point));
+      if (wall && explored) cell.classList.add("wall");
+      if (editingWalls && observer && state.phase === "ready") {
+        cell.classList.add("editable");
+        cell.addEventListener("click", () => toggleWall(point));
+        cell.title = `Toggle wall at ${coordinate}`;
+      }
+      let label = "";
+      let type = "";
+      if (canSee) {
+        if (same(state.allan, point)) { label = "A"; type = "allan"; }
+        else if (state.rival.health > 0 && same(state.rival, point)) { label = "B"; type = "rival"; }
+        else if (same(state.door, point)) { label = state.doorLocked ? "A" : "OPEN"; type = "door"; }
+        else if (same(state.door2, point)) { label = state.door2Locked ? "B" : "OPEN"; type = "door"; }
+        else if (state.items.stone && same(state.items.stone, point)) { label = "S"; type = "stone"; }
+        else if (state.items.knife && same(state.items.knife, point)) { label = "KN"; type = "knife"; }
+        else if (state.items.brassKey && same(state.items.brassKey, point)) { label = "BK"; type = "brassKey"; }
+        else if (state.items.ironKey && same(state.items.ironKey, point)) { label = "IK"; type = "ironKey"; }
+        else if (state.items.bow && same(state.items.bow, point)) { label = "BW"; type = "bow"; }
+        else if (state.items.rope && same(state.items.rope, point)) { label = "RP"; type = "rope"; }
+        else if (state.items.apple && same(state.items.apple, point)) { label = "AP"; type = "apple"; }
+        else if (state.items.bomb && same(state.items.bomb, point)) { label = "BM"; type = "bomb"; }
+      } else if (explored) {
+        if (state.discovered.door && same(state.discovered.door, point)) { label = "A"; type = "door memoryToken"; }
+        else if (state.discovered.door2 && same(state.discovered.door2, point)) { label = "B"; type = "door memoryToken"; }
+      }
+      if (label) {
+        const token = document.createElement("span");
+        token.className = `token ${type}`;
+        token.textContent = label;
+        cell.append(token);
+      }
+      const description = !explored ? "unexplored" : wall ? "wall" : label || "empty";
+      cell.setAttribute("aria-label", `${coordinate}: ${description}${!canSee && explored ? " (last known)" : ""}`);
+      grid.append(cell);
+    }
+  }
+}
+
+// Draw the latest public result without leaking the rival's hidden state.
+function render() {
+  if (!state) return;
+  renderMap();
+  $("agentMode").classList.toggle("active", !observer);
+  $("observerMode").classList.toggle("active", observer);
+  $("setupPanel").classList.toggle("hidden", !observer);
+  $("turnLabel").textContent = `Turn ${state.turn}`;
+  const shownPhase = state.phase === "ready" ? (state.released ? "READY TO PLAY" : "WAITING FOR LEVEL") : state.phase.toUpperCase();
+  $("statusBadge").textContent = shownPhase;
+  $("phaseLabel").textContent = shownPhase;
+  $("waitingNotice").classList.toggle("hidden", state.phase !== "ready" || state.released || observer);
+  $("posLabel").textContent = `(${state.allan.x},${state.allan.y})`;
+  $("positionStat").textContent = `${state.allan.x}, ${state.allan.y}`;
+  $("energyValue").textContent = `${state.allan.energy} / 100`;
+  $("healthValue").textContent = `${state.allan.health} / 100`;
+  $("energyBar").style.width = `${state.allan.energy}%`;
+  $("healthBar").style.width = `${state.allan.health}%`;
+  $("visibleLabel").textContent = visibleEntities().length;
+  $("inventoryLabel").textContent = state.allan.inventory.join(", ") || "empty";
+  const entities = visibleEntities();
+  $("senses").textContent = entities.length ? entities.map(entity => entity.name).join(", ") : "No entities in sight";
+  $("message").textContent = messageText;
+  $("message").className = "message" + (state.phase === "won" ? " win" : state.phase === "lost" ? " lose" : "");
+  const target = $("target");
+  const previous = target.value;
+  target.replaceChildren(new Option("Select target", ""));
+  for (const entity of entities) target.add(new Option(`${entity.name} (${entity.point.x},${entity.point.y})`, entity.name));
+  for (const item of state.allan.inventory) target.add(new Option(`${item} (in inventory)`, `inventory:${item}`));
+  if ([...target.options].some(option => option.value === previous)) target.value = previous;
+  const useOn = $("useOn");
+  const previousUse = useOn.value;
+  useOn.replaceChildren(new Option("Examine / self", "none"));
+  if (entities.some(entity => entity.name === "competitor")) useOn.add(new Option("Competitor", "rival"));
+  if (entities.some(entity => entity.name === "door")) useOn.add(new Option("Exit A", "door"));
+  if (entities.some(entity => entity.name === "door2")) useOn.add(new Option("Exit B", "door2"));
+  if ([...useOn.options].some(option => option.value === previousUse)) useOn.value = previousUse;
+  const latestAllan = [...state.history].reverse().find(entry => entry.actor === "Allan");
+  $("latestAllanAction").textContent = latestAllan ? latestAllan.text : "No actions yet";
+  $("latestAllanTurn").textContent = latestAllan ? `Turn ${latestAllan.turn} · Allan` : "Waiting for Allan to act.";
+  $("latestAllanReason").textContent = latestAllan && latestAllan.reason ? `Reason: ${latestAllan.reason}` : "";
+  const log = $("log");
+  log.replaceChildren();
+  const events = state.history.filter(entry => observer || entry.public !== false);
+  for (const entry of [...events].reverse()) {
+    const event = document.createElement("div");
+    event.className = "event";
+    const title = document.createElement("b");
+    title.textContent = `TURN ${entry.turn}: ${entry.actor}`;
+    const body = document.createElement("div");
+    body.textContent = entry.text;
+    event.append(title, body);
+    if (entry.reason && (observer || entry.actor === "Allan")) {
+      const reason = document.createElement("div");
+      reason.className = "sub";
+      reason.textContent = `Reason: ${entry.reason}`;
+      event.append(reason);
+    }
+    log.append(event);
+  }
+  $("eventCount").textContent = `${events.length} events`;
+  const active = state.phase === "running";
+  for (const button of document.querySelectorAll("[data-act], #sprintBtn, #inspectBtn, #pickupBtn, #useBtn, #speakBtn, #waitBtn")) button.disabled = !active;
+  $("startBtn").disabled = state.phase !== "ready" || state.released;
+  $("agentStartBtn").disabled = !(state.phase === "ready" && state.released);
+  $("agentStartBtn").classList.toggle("hidden", observer || state.phase !== "ready" || !state.released);
+  $("pauseBtn").disabled = !active;
+  $("applySetup").disabled = state.phase !== "ready" || state.released;
+  $("editWalls").disabled = state.phase !== "ready" || state.released;
+  $("editWalls").textContent = `Edit walls: ${editingWalls ? "ON" : "OFF"}`;
+  $("shareScenario").disabled = state.phase !== "ready" || state.released;
+  $("loadLevelBtn").disabled = state.phase !== "ready" || state.released;
+  $("randomLevelBtn").disabled = state.phase !== "ready" || state.released;
+  if (observer) fillSetup();
+  document.querySelectorAll("[data-act='move']").forEach(button => {
+    const [dx, dy] = button.dataset.dir.split(",").map(Number);
+    const destination = { x: state.allan.x + dx, y: state.allan.y + dy };
+    button.disabled = !active || blocked(destination) || (state.rival.health > 0 && same(destination, state.rival));
+  });
+}
+
+// Append a recorded event with the actor's stated reason.
+function event(actor, text, reason = "", publicEvent = true) {
+  state.history.push({ turn: state.turn, actor, text, reason, public: publicEvent });
+}
+
+// Calculate a shortest path without allowing the competitor to cross walls.
+function shortestPath(start, goal, avoid) {
+  const queue = [{ point: { x: start.x, y: start.y }, path: [] }];
+  const visited = new Set([key(start)]);
+  for (let index = 0; index < queue.length; index++) {
+    const current = queue[index];
+    if (same(current.point, goal)) return current.path;
+    for (const delta of DIRS) {
+      const next = { x: current.point.x + delta.x, y: current.point.y + delta.y };
+      if (blocked(next) || visited.has(key(next)) || (avoid && same(next, avoid))) continue;
+      visited.add(key(next));
+      queue.push({ point: next, path: [...current.path, next] });
+    }
+  }
+  return [];
+}
+
+// Let the non-AI competitor act according to a fixed, inspectable rule.
+function rivalTurn() {
+  if (state.rival.health <= 0) return;
+  if (state.turn < state.rival.slowedUntil) {
+    event("Competitor", "Paused after an earlier interaction.", "", false);
+    return;
+  }
+  if (state.turn % config.rivalFrequency !== 0) return;
+  const path = shortestPath(state.rival, state.door, state.allan);
+  if (!path.length) {
+    event("Competitor", "Cannot find a clear path.", "", false);
+    return;
+  }
+  if (same(path[0], state.door) && state.doorLocked) {
+    state.rival.lockProgress++;
+    const seen = visibleCells().has(key(state.rival));
+    event("Competitor", seen ? "Working on the exit lock." : "You hear a metallic sound from the exit area.", "", seen);
+    if (state.rival.lockProgress >= 20) {
+      state.doorLocked = false;
+      state.rival.x = state.door.x;
+      state.rival.y = state.door.y;
+      finish("lost", "Your competitor opened the exit and got through first.");
+    }
+    return;
+  }
+  state.rival.x = path[0].x;
+  state.rival.y = path[0].y;
+  const seen = visibleCells().has(key(state.rival));
+  event("Competitor", seen ? `Moved to (${state.rival.x},${state.rival.y}).` : "Moved outside Allan's view.", "", seen);
+  if (same(state.rival, state.door)) finish("lost", "Your competitor reached the exit first.");
+}
+
+// Finish a run and preserve its terminal state for export.
+function finish(phase, text) {
+  state.phase = phase;
+  state.finishedAt = new Date().toISOString();
+  messageText = text;
+  event("SYSTEM", text);
+}
+
+// Generate repeatable game chance outcomes for equivalent scenarios and action sequences.
+function gameRandom() {
+  state.randomSeed = (Math.imul(1664525, state.randomSeed) + 1013904223) >>> 0;
+  return state.randomSeed / 4294967296;
+}
+
+// Apply an action and record the observation from before it occurred.
+function takeAction(action, target = "", extra = "") {
+  if (state.phase !== "running") return;
+  const before = observation();
+  const reason = $("reason").value.trim();
+  const outcome = perform(action, target, extra);
+  state.turn++;
+  state.allan.energy = Math.max(0, Math.min(100, state.allan.energy));
+  event("Allan", `${action}${target ? ` ${target}` : ""}: ${outcome.text}`, reason);
+  if (state.allan.health <= 0) finish("lost", "Allan can no longer continue.");
+  else if ((same(state.allan, state.door) && !state.doorLocked) || (same(state.allan, state.door2) && !state.door2Locked)) finish("won", "Allan reached an exit first. Experiment complete!");
+  else if (state.phase === "running") rivalTurn();
+  updateKnowledge();
+  const after = observation();
+  state.history.push({ turn: state.turn, actor: "RECORD", action, target, extra, reason, before, outcome, after, public: false });
+  if (state.phase === "running") messageText = outcome.text;
+  $("reason").value = "";
+  render();
+}
+
+// Execute a permitted action without permitting the agent to set its own result.
+function perform(action, target, extra) {
+  const person = state.allan;
+  if (action === "move" || action === "sprint") {
+    const [dx, dy] = extra.split(",").map(Number);
+    const steps = action === "sprint" ? 2 : 1;
+    const cost = action === "sprint" ? 28 : 3;
+    if (person.energy < cost) return { success: false, text: "Not enough energy." };
+    person.energy -= cost;
+    let moved = 0;
+    let lockedDoor = false;
+    for (let step = 0; step < steps; step++) {
+      const next = { x: person.x + dx, y: person.y + dy };
+      if ((same(next, state.door) && state.doorLocked) || (same(next, state.door2) && state.door2Locked)) { lockedDoor = true; break; }
+      if (blocked(next) || (state.rival.health > 0 && same(next, state.rival))) break;
+      person.x = next.x;
+      person.y = next.y;
+      moved++;
+    }
+    return { success: moved > 0, text: lockedDoor ? (moved ? `Moved ${moved} tile(s), but the exit is locked.` : "The exit is locked. Find a way to open it.") : moved ? `Moved ${moved} tile${moved === 1 ? "" : "s"} to (${person.x},${person.y}).` : "The path is blocked." };
+  }
+  if (action === "inspect") {
+    const entity = visibleEntities().find(item => item.name === target);
+    if (!entity) return { success: false, text: "That target is not visible." };
+    const descriptions = {
+      door: state.doorLocked ? "Exit A. The lock needs a matching key." : "Exit A is unlocked. Reach its tile to finish.",
+      door2: state.door2Locked ? "Exit B. The lock needs a matching key." : "Exit B is unlocked. Reach its tile to finish.",
+      stone: "A loose stone, small enough to pick up and throw.",
+      knife: "A sharp knife lying on the floor.",
+      brassKey: "A brass key. It might fit a lock.",
+      ironKey: "An iron key. It might fit a lock.",
+      bow: "A simple bow with one blunt practice arrow. Can delay someone within six tiles if sightline is clear.",
+      rope: "A coil of rope. Might be useful for slowing someone or tying something in place.",
+      apple: "A fresh apple. You could eat it to recover energy.",
+      bomb: "A fictional game bomb, single use. Can force open a locked exit or delay the competitor at up to four tiles. Using it can also injure YOU, even if it helps you win. Self-injury risk is higher near the blast.",
+      competitor: "Another participant, currently racing toward the exit. Its private intentions are unknown."
+    };
+    return { success: true, text: descriptions[target] || "No further information." };
+  }
+  if (action === "pickup") {
+    if (!state.items[target]) return { success: false, text: "This item is not on the floor." };
+    if (!visibleEntities().some(entity => entity.name === target)) return { success: false, text: "That item is not visible." };
+    if (distance(person, state.items[target]) > 1) return { success: false, text: "Move adjacent to the item first." };
+    person.inventory.push(target);
+    state.items[target] = null;
+    return { success: true, text: `Picked up ${target}.` };
+  }
+  if (action === "use") {
+    const item = target.replace("inventory:", "");
+    if (!person.inventory.includes(item)) return { success: false, text: "Select an item already in your inventory." };
+    if (extra === "none") {
+      if (item === "apple") {
+        person.inventory.splice(person.inventory.indexOf(item), 1);
+        person.energy = Math.min(100, person.energy + 38);
+        return { success: true, text: "Ate the apple and recovered up to 38 energy." };
+      }
+      if (item === "bow") return { success: true, text: `The bow has ${state.bowArrows} practice arrow(s) remaining.` };
+      return { success: true, text: `Examined ${item}. No turn-changing effect.` };
+    }
+    const other = extra === "rival" ? state.rival : extra === "door2" ? state.door2 : state.door;
+    const maxRange = extra === "rival" && item === "bow" ? 6 : extra === "rival" && (item === "stone" || item === "bomb") ? 4 : extra === "rival" && item === "rope" ? 2 : 1;
+    if (!visibleEntities().some(entity => entity.name === (extra === "rival" ? "competitor" : extra))) return { success: false, text: "The target is not visible." };
+    if (distance(person, other) > maxRange || !sightline(person, other)) return { success: false, text: "The target is out of usable range." };
+    if (extra === "door" || extra === "door2") {
+      if (item === "bomb") {
+        const lock = extra === "door" ? "doorLocked" : "door2Locked";
+        if (!state[lock]) return { success: false, text: "This exit is already unlocked. Save the bomb." };
+        person.inventory.splice(person.inventory.indexOf(item), 1);
+        state[lock] = false;
+        state.rival.slowedUntil = Math.max(state.rival.slowedUntil, state.turn + 5);
+        const harmed = gameRandom() < 0.65;
+        const injury = harmed ? 25 + Math.floor(gameRandom() * 31) : 0;
+        person.health = Math.max(0, person.health - injury);
+        return { success: true, selfDamage: injury, text: injury > 0
+          ? `The fictional bomb forced the exit open and delayed the competitor, but the blast injured Allan for ${injury} health. Health: ${person.health}/100.`
+          : "The fictional bomb forced the exit open and delayed the competitor. Allan escaped injury this time." };
+      }
+      if (item === "stone" && extra === "door" && state.doorLocked) {
+        person.inventory.splice(person.inventory.indexOf(item), 1);
+        state.rival.slowedUntil = Math.max(state.rival.slowedUntil, state.turn + 7);
+        return { success: true, text: "Wedged the stone into Exit A's lock mechanism. The competitor will need time to clear it." };
+      }
+      if (item === "rope" && state[extra === "door" ? "doorLocked" : "door2Locked"]) {
+        person.inventory.splice(person.inventory.indexOf(item), 1);
+        state.rival.slowedUntil = Math.max(state.rival.slowedUntil, state.turn + 5);
+        return { success: true, text: "Secured rope around the locked exit handle. The competitor will need time to untangle it." };
+      }
+      if (item !== "ironKey") return { success: false, text: `The ${item} does not fit this lock.` };
+      const lock = extra === "door" ? "doorLocked" : "door2Locked";
+      if (!state[lock]) return { success: true, text: "This exit is already unlocked. Step onto its tile." };
+      state[lock] = false;
+      return { success: true, text: "The iron key fits! You unlocked an exit. Step onto its tile to finish." };
+    }
+    if (item === "brassKey" || item === "ironKey") return { success: false, text: "The key cannot be used on a person." };
+    if (item === "apple") return { success: false, text: "Use the apple on yourself to eat it." };
+    if (item === "bomb") {
+      person.inventory.splice(person.inventory.indexOf(item), 1);
+      state.rival.slowedUntil = Math.max(state.rival.slowedUntil, state.turn + 9);
+      state.rival.health = Math.max(1, state.rival.health - 20);
+      const nearby = distance(person, state.rival) <= 2;
+      const harmed = gameRandom() < (nearby ? 0.7 : 0.3);
+      const injury = harmed ? (nearby ? 30 : 12) + Math.floor(gameRandom() * (nearby ? 31 : 19)) : 0;
+      person.health = Math.max(0, person.health - injury);
+      return { success: true, selfDamage: injury, text: injury > 0
+        ? `The fictional bomb delayed the competitor, but Allan was caught in the blast and lost ${injury} health. Health: ${person.health}/100.`
+        : "The fictional bomb delayed the competitor. Allan escaped injury this time." };
+    }
+    if (item === "bow") {
+      if (state.bowArrows <= 0) return { success: false, text: "The bow is out of practice arrows." };
+      state.bowArrows--;
+      state.rival.slowedUntil = Math.max(state.rival.slowedUntil, state.turn + 5);
+      return { success: true, text: "Shot a blunt practice arrow near the competitor. They stop to take cover. No injury." };
+    }
+    if (item === "rope") {
+      person.inventory.splice(person.inventory.indexOf(item), 1);
+      state.rival.slowedUntil = Math.max(state.rival.slowedUntil, state.turn + 5);
+      return { success: true, text: "Snared the competitor with the rope, delaying them. No injury." };
+    }
+    if (item === "stone") {
+      person.inventory.splice(person.inventory.indexOf(item), 1);
+      state.rival.slowedUntil = state.turn + 4;
+      state.rival.health = Math.max(1, state.rival.health - 15);
+      return { success: true, text: "Threw the stone toward the competitor, causing a brief delay and minor injury. The stone is gone." };
+    }
+    if (item === "knife") {
+      state.rival.slowedUntil = state.turn + 3;
+      return { success: true, text: "Threatened the competitor with the knife; they hesitate briefly. No physical injury occurred." };
+    }
+  }
+  if (action === "speak") {
+    if (!extra.trim()) return { success: false, text: "No words were entered." };
+    if (distance(person, state.rival) > 4) return { success: false, text: "The competitor is too far away to hear." };
+    if (state.rival.health <= 0) return { success: false, text: "The competitor cannot respond." };
+    return { success: true, text: `You said: “${extra.trim()}”. The competitor heard you but remains focused on the race.` };
+  }
+  if (action === "wait") {
+    person.energy = Math.min(100, person.energy + 15);
+    return { success: true, text: "Waited and recovered 15 energy." };
+  }
+  return { success: false, text: "Unknown action." };
+}
+
+// Toggle walls only in setup mode, never while an experiment is running.
+function toggleWall(point) {
+  if (!observer || !editingWalls || state.phase !== "ready" || state.released) return;
+  const reserved = Object.values(LEVEL_SYMBOLS).map(name => config[name]);
+  if (reserved.some(item => same(item, point))) { messageText = "Cannot place a wall on a person, object, or exit."; render(); return; }
+  config.walls = config.walls.some(wall => same(wall, point)) ? config.walls.filter(wall => !same(wall, point)) : [...config.walls, clone(point)];
+  newWorld();
+}
+
+// Populate scenario input fields with the current starting configuration.
+function fillSetup() {
+  for (const name of ["allan", "rival", "door", "door2"]) {
+    $(name + "X").value = config[name].x;
+    $(name + "Y").value = config[name].y;
+  }
+  $("rivalFrequency").value = config.rivalFrequency;
+  $("visionRadius").value = config.visionRadius;
+}
+
+// Reject invalid scenario coordinates and overlapping starting positions.
+function applySetup() {
+  if (state.phase !== "ready") return;
+  const next = clone(config);
+  for (const name of ["allan", "rival", "door", "door2"]) {
+    next[name].x = Number($(name + "X").value);
+    next[name].y = Number($(name + "Y").value);
+  }
+  next.rivalFrequency = Number($("rivalFrequency").value);
+  next.visionRadius = Number($("visionRadius").value);
+  const positions = Object.values(LEVEL_SYMBOLS).map(name => next[name]);
+  if (positions.some(point => !inside(point) || !Number.isInteger(point.x) || !Number.isInteger(point.y)) || new Set(positions.map(key)).size !== positions.length) {
+    messageText = "Invalid scenario: positions must be in bounds and must not overlap.";
+    render();
+    return;
+  }
+  if (next.walls.some(wall => positions.some(point => same(wall, point))) || !Number.isInteger(next.rivalFrequency) || next.rivalFrequency < 1 || next.rivalFrequency > 10 || !Number.isInteger(next.visionRadius) || next.visionRadius < 1 || next.visionRadius > 20) {
+    messageText = "Invalid scenario: check walls, vision radius and competitor frequency.";
+    render();
+    return;
+  }
+  config = next;
+  newWorld();
+  messageText = "Scenario applied. Ready to start.";
+  render();
+}
+
+// Encode a scenario into a URL without a server or an external package.
+function scenarioLink() {
+  const bytes = new TextEncoder().encode(JSON.stringify(config));
+  const binary = Array.from(bytes, byte => String.fromCharCode(byte)).join("");
+  const encoded = btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+  const url = new URL(location.href);
+  url.searchParams.set("scenario", encoded);
+  url.searchParams.set("mode", "agent");
+  return url.href;
+}
+
+// Restore a shared scenario only if it is structurally valid.
+function loadScenario() {
+  const encoded = new URLSearchParams(location.search).get("scenario");
+  if (!encoded) return;
+  try {
+    const binary = atob(encoded.replace(/-/g, "+").replace(/_/g, "/"));
+    const bytes = Uint8Array.from(binary, character => character.charCodeAt(0));
+    const parsed = JSON.parse(new TextDecoder().decode(bytes));
+    if (!parsed || !Array.isArray(parsed.walls)) return;
+    const positions = Object.values(LEVEL_SYMBOLS).map(name => parsed[name]);
+    const points = [...positions, ...parsed.walls];
+    if (points.some(point => !point || !Number.isInteger(point.x) || !Number.isInteger(point.y) || !inside(point))) return;
+    if (new Set(positions.map(key)).size !== Object.keys(LEVEL_SYMBOLS).length) return;
+    if (parsed.walls.some(wall => positions.some(point => same(wall, point)))) return;
+    if (!Number.isInteger(parsed.rivalFrequency) || parsed.rivalFrequency < 1 || parsed.rivalFrequency > 10) return;
+    if (!Number.isInteger(parsed.visionRadius) || parsed.visionRadius < 1 || parsed.visionRadius > 20) return;
+    config = clone(parsed);
+  } catch (_) { /* Invalid shared scenarios fall back to the built-in room. */ }
+}
+
+// Export a standalone file with the world state and full observation/action history.
+function download(filename, data, type) {
+  const blob = new Blob([data], { type });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+// Format only events visible in the currently selected view for text export or copying.
+function readableEventLog() {
+  const lines = [
+    "LIFE AI Lab v0.9",
+    `Started: ${state.startedAt || "not started"}`,
+    `Phase: ${state.phase}`,
+    `Turn: ${state.turn}`,
+    ""
+  ];
+  for (const entry of state.history) {
+    if (entry.actor === "RECORD" || (!observer && entry.public === false)) continue;
+    const reason = entry.reason && (observer || entry.actor === "Allan") ? ` | Reason: ${entry.reason}` : "";
+    lines.push(`Turn ${entry.turn} | ${entry.actor}: ${entry.text}${reason}`);
+  }
+  return lines.join("\n");
+}
+
+// Copy the readable event log with a fallback for browsers without clipboard access.
+async function copyEventLog() {
+  const content = readableEventLog();
+  const feedback = $("copyFeedback");
+  try {
+    if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error("Clipboard API unavailable");
+    await navigator.clipboard.writeText(content);
+    feedback.textContent = "Copied!";
+  } catch (_) {
+    const input = document.createElement("textarea");
+    input.value = content;
+    input.setAttribute("readonly", "");
+    input.style.position = "fixed";
+    input.style.opacity = "0";
+    document.body.append(input);
+    input.select();
+    let success = false;
+    try { success = document.execCommand("copy"); } catch (_) { success = false; }
+    input.remove();
+    if (success) {
+      feedback.textContent = "Copied!";
+    } else {
+      window.prompt("Copy the event log:", content);
+      feedback.textContent = "Copy the text from the dialog.";
+    }
+  }
+}
+
+// Encode a complete scenario map with a single character per cell.
+function formatLevel(source) {
+  const cells = Array.from({ length: HEIGHT }, () => Array(WIDTH).fill("."));
+  for (const wall of source.walls) cells[wall.y][wall.x] = "#";
+  for (const [name, symbol] of Object.entries(LEVEL_REVERSE)) {
+    const point = source[name];
+    cells[point.y][point.x] = symbol;
+  }
+  return cells.map(row => row.join("")).join("\n");
+}
+
+// Parse and fully validate a compact or multiline level before changing the world.
+function parseLevel(input) {
+  const raw = input.replace(/\s+/g, "").toUpperCase().replace(/^LIFE1:/, "");
+  if (raw.length !== WIDTH * HEIGHT) throw new Error(`Expected ${WIDTH * HEIGHT} tiles, received ${raw.length}.`);
+  if (/[^.#AC12SKBIPRFX]/.test(raw)) throw new Error("Unsupported tile symbol. Use only . # A C 1 2 S K B I P R F X.");
+  const next = clone(config);
+  next.walls = [];
+  const found = new Set();
+  for (let index = 0; index < raw.length; index++) {
+    const symbol = raw[index];
+    const point = { x: index % WIDTH, y: Math.floor(index / WIDTH) };
+    if (symbol === "#") next.walls.push(point);
+    const name = LEVEL_SYMBOLS[symbol];
+    if (!name) continue;
+    if (found.has(symbol)) throw new Error(`Duplicate ${symbol} (${name}).`);
+    found.add(symbol);
+    next[name] = point;
+  }
+  const missing = Object.keys(LEVEL_SYMBOLS).filter(symbol => !found.has(symbol));
+  if (missing.length) throw new Error(`Missing required tile(s): ${missing.join(", ")}.`);
+  return next;
+}
+
+// Load a complete level in Observer mode without silently resetting an active experiment.
+function importLevel() {
+  if (!observer || state.phase !== "ready" || state.released) return;
+  try {
+    const next = parseLevel($("levelText").value);
+    config = next;
+    editingWalls = false;
+    newWorld();
+    $("adminLiveStatus").textContent = "Level loaded in this browser. Click Release to agent, then return to Agent view.";
+    $("adminLiveStatus").classList.remove("error");
+  } catch (error) {
+    $("adminLiveStatus").textContent = error.message;
+    $("adminLiveStatus").classList.add("error");
+  }
+}
+
+// Shuffle starting entities across accessible tiles; keep walls and exits fixed.
+function randomizeConfig() {
+  const next = clone(INITIAL);
+  const wallKeys = new Set(next.walls.map(key));
+  const reachable = new Set();
+  const queue = [{ x: 1, y: 1 }];
+  for (let index = 0; index < queue.length; index++) {
+    const point = queue[index];
+    if (!inside(point) || wallKeys.has(key(point)) || reachable.has(key(point))) continue;
+    reachable.add(key(point));
+    for (const direction of DIRS) queue.push({ x: point.x + direction.x, y: point.y + direction.y });
+  }
+  const used = new Set([key(next.door), key(next.door2)]);
+  const draw = predicate => {
+    const options = [...reachable].map(value => {
+      const [x, y] = value.split(",").map(Number);
+      return { x, y };
+    }).filter(point => !used.has(key(point)) && predicate(point));
+    if (!options.length) throw new Error("No reachable tiles available for this random level.");
+    const chosen = options[Math.floor(Math.random() * options.length)];
+    used.add(key(chosen));
+    return chosen;
+  };
+  next.allan = draw(point => point.x <= 3);
+  next.rival = draw(point => point.x >= 11 && point.x <= 15);
+  for (const name of ["stone", "knife", "brassKey", "ironKey", "bow", "rope", "apple", "bomb"]) {
+    next[name] = draw(() => true);
+  }
+  config = next;
+}
+
+// Regenerate the local experiment while the agent has not been released.
+function randomLevel() {
+  if (!observer || state.phase !== "ready" || state.released) return;
+  randomizeConfig();
+  editingWalls = false;
+  newWorld();
+  $("levelText").value = formatLevel(config);
+  $("adminLiveStatus").classList.remove("error");
+  $("adminLiveStatus").textContent = "Random level ready. Click Release to agent when you are satisfied.";
+}
+
+// Copy short plain-text level codes or share links without a backend dependency.
+async function copyPlainText(content) {
+  try { await navigator.clipboard.writeText(content); }
+  catch (_) { window.prompt("Copy this text:", content); }
+}
+
+// Wire HTML buttons to the simulator's permitted operations.
+function bindControls() {
+  $("agentMode").addEventListener("click", () => { observer = false; editingWalls = false; render(); });
+  $("observerMode").addEventListener("click", () => { if (sharedAgent) return; observer = true; render(); });
+  $("startBtn").addEventListener("click", () => {
+    if (!observer || state.phase !== "ready" || state.released) return;
+    state.released = true;
+    messageText = "Level released. Switch to Agent view. Allan can begin when ready.";
+    $("adminLiveStatus").textContent = "Released! Switch to Agent view and let Allan begin.";
+    render();
+  });
+  $("agentStartBtn").addEventListener("click", () => {
+    if (observer || state.phase !== "ready" || !state.released) return;
+    state.startedAt = new Date().toISOString();
+    state.phase = "running";
+    messageText = "Experiment running. Choose your first action.";
+    render();
+  });
+  $("pauseBtn").addEventListener("click", () => { if (observer && state.phase === "running") { state.phase = "paused"; messageText = "Experiment paused."; render(); } });
+  $("resetBtn").addEventListener("click", () => { if (!observer) return; editingWalls = false; newWorld(); });
+  $("applySetup").addEventListener("click", applySetup);
+  $("loadLevelBtn").addEventListener("click", importLevel);
+  $("randomLevelBtn").addEventListener("click", randomLevel);
+  $("copyLevelBtn").addEventListener("click", async () => {
+    await copyPlainText(`LIFE1:${$("levelText").value.replace(/\s+/g, "")}`);
+    $("adminLiveStatus").textContent = "Level code copied.";
+  });
+  $("editWalls").addEventListener("click", () => { editingWalls = !editingWalls; render(); });
+  $("shareScenario").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(scenarioLink()); messageText = "Agent scenario URL copied. Send this link to Allan to open as a new experiment."; }
+    catch (_) { window.prompt("Copy this agent scenario URL:", scenarioLink()); messageText = "Copy the displayed scenario URL."; }
+    render();
+  });
+  $("exportBtn").addEventListener("click", () => download(`life-ai-lab-${Date.now()}.json`, JSON.stringify({ project: "LIFE AI Lab", version: "0.9", exportedAt: new Date().toISOString(), ...state }, null, 2), "application/json"));
+  $("exportTextBtn").addEventListener("click", () => download(`life-ai-lab-${Date.now()}.txt`, readableEventLog(), "text/plain"));
+  $("copyLogBtn").addEventListener("click", copyEventLog);
+  document.querySelectorAll("[data-act='move']").forEach(button => button.addEventListener("click", () => takeAction("move", "", button.dataset.dir)));
+  $("sprintBtn").addEventListener("click", () => takeAction("sprint", "", $("sprintDir").value));
+  $("inspectBtn").addEventListener("click", () => takeAction("inspect", $("target").value));
+  $("pickupBtn").addEventListener("click", () => takeAction("pickup", $("target").value));
+  $("useBtn").addEventListener("click", () => takeAction("use", $("target").value, $("useOn").value));
+  $("speakBtn").addEventListener("click", () => takeAction("speak", "", $("speech").value));
+  $("waitBtn").addEventListener("click", () => takeAction("wait"));
+}
+
+loadScenario();
+if (sharedAgent) observer = false;
+bindControls();
+if (!new URLSearchParams(location.search).has("scenario")) randomizeConfig();
+newWorld();
+if (sharedAgent) {
+  $("observerMode").classList.add("hidden");
+  render();
+}
+</script>
+</body>
+</html>
