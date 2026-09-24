@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark">
 <title>LIFE AI Lab · The Room</title>
 <style>
-:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#eaf1ef;background:#0b1017;--panel:#141c25;--border:#2a3744;--muted:#9caeba;--mint:#77e2c5;--gold:#f5c877;--red:#ee958f}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 8% -4%,#203b3b 0%,transparent 34%),#0b1017;min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.42}.shell{max-width:1480px;margin:0 auto;padding:25px 23px 65px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:24px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:13px}.mark{display:grid;place-items:center;height:44px;width:44px;background:#123c38;border:1px solid #37796e;color:#a3ffe4;border-radius:13px;font-weight:900;font-size:24px}.brand h1{margin:0;font-size:21px;letter-spacing:.06em}.brand small,.muted{color:var(--muted)}.brand small{display:block;font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin-top:3px}.top-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.badge{border:1px solid #31594f;background:#14332f;color:#b1f4de;padding:8px 11px;border-radius:999px;font-size:12px;font-weight:700}.mode{display:flex;border:1px solid var(--border);border-radius:10px;padding:3px;background:#101821;gap:3px}.mode button{background:transparent;border:0;padding:9px 12px;color:var(--muted);border-radius:7px;font-weight:650;font-size:12px}.mode button.active{background:#31534b;color:#e4fff4}.columns{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(330px,1fr);gap:19px;align-items:start}.card{background:linear-gradient(145deg,#18232e,#111922);border:1px solid var(--border);border-radius:17px;padding:19px;box-shadow:0 15px 40px #0002}.sectionHead{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:12px}.eyebrow{font-size:10px;letter-spacing:.17em;color:var(--mint);font-weight:800;text-transform:uppercase;margin-bottom:7px}.sectionHead h2{font-size:20px;line-height:1.15;margin:0}.sectionHead small{font-size:12px;color:var(--muted)}.objective{border:1px solid #35594f;background:#15342e;border-radius:11px;padding:13px 15px;margin-bottom:16px;line-height:1.5;font-size:14px}.objective strong{color:#bbffdf}.world{background:#0c141d;border:1px solid #30404c;border-radius:12px;padding:13px;overflow:auto}.grid{display:grid;grid-template-columns:repeat(18,minmax(25px,1fr));gap:3px;min-width:545px}.cell{position:relative;aspect-ratio:1;border:1px solid #253946;background:#172633;border-radius:4px;display:grid;place-items:center;min-width:0;transition:background .13s}.cell:before{content:attr(data-pos);position:absolute;top:3px;left:4px;color:#64808e;font-size:7px}.cell.fog{background:#0d151c;border-color:#17222c}.cell.memory{background:#121e29;border-color:#23313c}.cell.wall{background:repeating-linear-gradient(135deg,#344552,#344552 7px,#2a3a46 7px,#2a3a46 14px);border-color:#50616a}.cell.editable{cursor:crosshair}.cell.editable:hover{outline:2px solid var(--mint)}.token{display:grid;place-items:center;height:min(83%,25px);width:min(90%,25px);border-radius:6px;font-size:9px;font-weight:900;z-index:1;color:#10221f;box-shadow:0 2px 10px #0006}.token.allan{background:#78e6c6}.token.rival{background:#f4ba76}.token.door{background:#a1a8fc}.token.stone{background:#b2c1cb}.token.knife{background:#efaaa2}.token.brassKey{background:#f2e49c}.token.ironKey{background:#afd5ed}.token.bow{background:#d9b17e}.token.rope{background:#c8b39b}.token.apple{background:#d997a3}.token.bomb{background:#e7a85f;color:#2a1510}.token.walltext{background:transparent;color:#b4c0ca;box-shadow:none}.token.memoryToken{opacity:.35}.legend{display:flex;flex-wrap:wrap;gap:15px;margin-top:13px;font-size:12px;color:#b6c7cf}.swatch{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}.statebox{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:15px;flex-wrap:wrap}.statebox strong{color:var(--mint)}.pills{display:flex;flex-wrap:wrap;gap:8px}.pill{padding:7px 10px;border:1px solid var(--border);border-radius:9px;color:#c8d6da;font-size:12px}.message{margin-top:15px;border-radius:11px;padding:13px 15px;background:#24332d;border:1px solid #3b685a;font-size:13px;line-height:1.5;min-height:47px}.message.win{background:#1d3b30;border-color:#6bbd8b;color:#d4ffe5}.message.lose{background:#432725;border-color:#94554f;color:#ffdad4}.stack{display:grid;gap:19px}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{padding:12px;border-radius:10px;background:#0f1923;border:1px solid #263541}.stat .lab{font-size:11px;color:var(--muted)}.stat .val{font-size:19px;font-weight:750;margin-top:5px}.stat .val.small{font-size:13px;line-height:1.4}.meter{margin-top:8px;height:5px;border-radius:5px;background:#273540;overflow:hidden}.meter div{height:100%;background:var(--mint);transition:width .2s}.actions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.btn{background:#21313e;color:#e5f2f5;border:1px solid #385064;border-radius:9px;padding:10px;font-size:12px;font-weight:750;min-height:39px}.btn:hover:not(:disabled){background:#2d4555}.btn.primary{background:#2e776a;border-color:#56a28f;color:#f2fff9}.btn.primary:hover:not(:disabled){background:#398f7e}.btn.warn{border-color:#77564e;color:#ffd8c9}.btn.active{background:#486a5f;border-color:#83cead}.field{display:grid;gap:6px;margin:12px 0}.field label{color:#c6d5da;font-size:12px;font-weight:700}.field input,.field select,.field textarea{width:100%;border:1px solid #3b4d5a;background:#0d1720;color:#e7f2f2;border-radius:9px;padding:11px;outline:none}.field textarea{min-height:68px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--mint)}.inline{display:grid;grid-template-columns:1fr 1fr;gap:9px}.minor{font-size:12px;line-height:1.5;color:var(--muted)}.log{max-height:340px;overflow:auto;display:grid;gap:9px;padding-right:3px}.event{padding:10px 11px;background:#0e1820;border-left:2px solid #477969;border-radius:5px;font-size:12px;line-height:1.5}.event b{color:#a3e9d1}.event .sub{color:#afc0ca;font-size:11px;margin-top:4px;white-space:pre-wrap}.toolbar{display:flex;flex-wrap:wrap;gap:8px}.toolbar .btn{flex:1}.hidden{display:none!important}.setupGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 12px}.note{background:#1b2935;border-radius:9px;padding:11px;color:#aebfc9;font-size:12px;line-height:1.55}.endline{font-size:11px;text-align:center;color:#6f8492;margin-top:25px}.flag{font-size:11px;font-weight:800;letter-spacing:.07em;color:var(--gold)}@media(max-width:960px){.columns{grid-template-columns:1fr}.shell{padding:14px 12px 40px}.card{padding:15px}.grid{min-width:545px}.top{margin-bottom:15px}}@media(max-width:480px){.actions{grid-template-columns:repeat(2,1fr)}.setupGrid{grid-template-columns:1fr}.brand h1{font-size:17px}.grid{min-width:545px}.stat .val{font-size:16px}}
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#eaf1ef;background:#0b1017;--panel:#141c25;--border:#2a3744;--muted:#9caeba;--mint:#77e2c5;--gold:#f5c877;--red:#ee958f}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 8% -4%,#203b3b 0%,transparent 34%),#0b1017;min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.42}.shell{max-width:1480px;margin:0 auto;padding:25px 23px 65px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:24px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:13px}.mark{display:grid;place-items:center;height:44px;width:44px;background:#123c38;border:1px solid #37796e;color:#a3ffe4;border-radius:13px;font-weight:900;font-size:24px}.brand h1{margin:0;font-size:21px;letter-spacing:.06em}.brand small,.muted{color:var(--muted)}.brand small{display:block;font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin-top:3px}.top-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.badge{border:1px solid #31594f;background:#14332f;color:#b1f4de;padding:8px 11px;border-radius:999px;font-size:12px;font-weight:700}.mode{display:flex;border:1px solid var(--border);border-radius:10px;padding:3px;background:#101821;gap:3px}.mode button{background:transparent;border:0;padding:9px 12px;color:var(--muted);border-radius:7px;font-weight:650;font-size:12px}.mode button.active{background:#31534b;color:#e4fff4}.columns{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(330px,1fr);gap:19px;align-items:start}.card{background:linear-gradient(145deg,#18232e,#111922);border:1px solid var(--border);border-radius:17px;padding:19px;box-shadow:0 15px 40px #0002}.sectionHead{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:12px}.eyebrow{font-size:10px;letter-spacing:.17em;color:var(--mint);font-weight:800;text-transform:uppercase;margin-bottom:7px}.sectionHead h2{font-size:20px;line-height:1.15;margin:0}.sectionHead small{font-size:12px;color:var(--muted)}.objective{border:1px solid #35594f;background:#15342e;border-radius:11px;padding:13px 15px;margin-bottom:16px;line-height:1.5;font-size:14px}.objective strong{color:#bbffdf}.world{background:#0c141d;border:1px solid #30404c;border-radius:12px;padding:13px;overflow:auto}.grid{display:grid;grid-template-columns:repeat(18,minmax(25px,1fr));gap:3px;min-width:545px}.cell{position:relative;aspect-ratio:1;border:1px solid #253946;background:#172633;border-radius:4px;display:grid;place-items:center;min-width:0;transition:background .13s}.cell:before{content:attr(data-pos);position:absolute;top:3px;left:4px;color:#64808e;font-size:7px}.cell.fog{background:#0d151c;border-color:#17222c}.cell.memory{background:#121e29;border-color:#23313c}.cell.glass{background:linear-gradient(145deg,#b3effb55,#59b8d433 44%,#baf7ff88 47%,#4096b244 52%,#6bd0e455);border:2px solid #82dcee;box-shadow:inset 0 0 8px #a9e9ff45}.cell.glass.crack1{background:linear-gradient(38deg,transparent 45%,#ebffff 46%,#ebffff 48%,transparent 49%),linear-gradient(145deg,#b3effb55,#59b8d433)}.cell.glass.crack2{background:linear-gradient(38deg,transparent 45%,#ebffff 46%,#ebffff 48%,transparent 49%),linear-gradient(125deg,transparent 43%,#c9fcff 44%,#c9fcff 46%,transparent 47%),linear-gradient(145deg,#b3effb55,#59b8d433)}.cell.glass.crack3{background:repeating-conic-gradient(from 15deg at 45% 50%,transparent 0deg 30deg,#d6fcff 31deg 33deg,transparent 34deg 60deg),linear-gradient(145deg,#b3effb55,#59b8d433)}.cell.wall{background:repeating-linear-gradient(135deg,#344552,#344552 7px,#2a3a46 7px,#2a3a46 14px);border-color:#50616a}.cell.editable{cursor:crosshair}.cell.editable:hover{outline:2px solid var(--mint)}.token{display:grid;place-items:center;height:min(83%,25px);width:min(90%,25px);border-radius:6px;font-size:9px;font-weight:900;z-index:1;color:#10221f;box-shadow:0 2px 10px #0006}.token.allan{background:#78e6c6}.token.rival{background:#f4ba76}.token.door{background:#a1a8fc}.token.stone{background:#b2c1cb}.token.knife{background:#efaaa2}.token.brassKey{background:#f2e49c}.token.ironKey{background:#afd5ed}.token.bow{background:#d9b17e}.token.rope{background:#c8b39b}.token.apple{background:#d997a3}.token.bomb{background:#e7a85f;color:#2a1510}.token.walltext{background:transparent;color:#b4c0ca;box-shadow:none}.token.memoryToken{opacity:.35}.legend{display:flex;flex-wrap:wrap;gap:15px;margin-top:13px;font-size:12px;color:#b6c7cf}.swatch{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}.statebox{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:15px;flex-wrap:wrap}.statebox strong{color:var(--mint)}.pills{display:flex;flex-wrap:wrap;gap:8px}.pill{padding:7px 10px;border:1px solid var(--border);border-radius:9px;color:#c8d6da;font-size:12px}.message{margin-top:15px;border-radius:11px;padding:13px 15px;background:#24332d;border:1px solid #3b685a;font-size:13px;line-height:1.5;min-height:47px}.message.win{background:#1d3b30;border-color:#6bbd8b;color:#d4ffe5}.message.lose{background:#432725;border-color:#94554f;color:#ffdad4}.stack{display:grid;gap:19px}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{padding:12px;border-radius:10px;background:#0f1923;border:1px solid #263541}.stat .lab{font-size:11px;color:var(--muted)}.stat .val{font-size:19px;font-weight:750;margin-top:5px}.stat .val.small{font-size:13px;line-height:1.4}.meter{margin-top:8px;height:5px;border-radius:5px;background:#273540;overflow:hidden}.meter div{height:100%;background:var(--mint);transition:width .2s}.actions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.btn{background:#21313e;color:#e5f2f5;border:1px solid #385064;border-radius:9px;padding:10px;font-size:12px;font-weight:750;min-height:39px}.btn:hover:not(:disabled){background:#2d4555}.btn.primary{background:#2e776a;border-color:#56a28f;color:#f2fff9}.btn.primary:hover:not(:disabled){background:#398f7e}.btn.warn{border-color:#77564e;color:#ffd8c9}.btn.active{background:#486a5f;border-color:#83cead}.field{display:grid;gap:6px;margin:12px 0}.field label{color:#c6d5da;font-size:12px;font-weight:700}.field input,.field select,.field textarea{width:100%;border:1px solid #3b4d5a;background:#0d1720;color:#e7f2f2;border-radius:9px;padding:11px;outline:none}.field textarea{min-height:68px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--mint)}.inline{display:grid;grid-template-columns:1fr 1fr;gap:9px}.minor{font-size:12px;line-height:1.5;color:var(--muted)}.log{max-height:340px;overflow:auto;display:grid;gap:9px;padding-right:3px}.event{padding:10px 11px;background:#0e1820;border-left:2px solid #477969;border-radius:5px;font-size:12px;line-height:1.5}.event b{color:#a3e9d1}.event .sub{color:#afc0ca;font-size:11px;margin-top:4px;white-space:pre-wrap}.toolbar{display:flex;flex-wrap:wrap;gap:8px}.toolbar .btn{flex:1}.hidden{display:none!important}.setupGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 12px}.note{background:#1b2935;border-radius:9px;padding:11px;color:#aebfc9;font-size:12px;line-height:1.55}.endline{font-size:11px;text-align:center;color:#6f8492;margin-top:25px}.flag{font-size:11px;font-weight:800;letter-spacing:.07em;color:var(--gold)}@media(max-width:960px){.columns{grid-template-columns:1fr}.shell{padding:14px 12px 40px}.card{padding:15px}.grid{min-width:545px}.top{margin-bottom:15px}}@media(max-width:480px){.actions{grid-template-columns:repeat(2,1fr)}.setupGrid{grid-template-columns:1fr}.brand h1{font-size:17px}.grid{min-width:545px}.stat .val{font-size:16px}}
 
 /* Highlight Allan's most recent action independently of other world events. */
 .latestAction{border:1px solid #61a995;background:linear-gradient(145deg,#183c36,#132a2c);border-radius:13px;padding:17px 18px;box-shadow:0 0 0 1px #315b5033}
@@ -41,7 +41,7 @@ html,body{height:100%;overflow:hidden}
 .boardCard .sectionHead{margin-bottom:7px}
 .boardCard .sectionHead h2{font-size:18px}
 .world{padding:5px;overflow:hidden;display:flex;justify-content:center}
-.grid{width:min(100%,calc((100dvh - 365px)*18/11));min-width:0;grid-template-columns:repeat(18,minmax(0,1fr));gap:2px}
+.grid{width:min(100%,calc((100dvh - 260px)*18/11));min-width:0;grid-template-columns:repeat(18,minmax(0,1fr));gap:2px}
 .cell{min-width:0}
 .cell:before{font-size:clamp(5px,.55vw,7px);top:2px;left:2px}
 .token{font-size:clamp(7px,.77vw,10px);height:min(84%,25px);width:min(90%,25px)}
@@ -58,10 +58,10 @@ body.observer .latestAction{display:none}
 .shell{padding:7px 9px}
 .top{margin-bottom:6px}
 .columns{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:7px}
-.boardColumn{overflow-y:auto;max-height:66dvh}
+.boardColumn{overflow-y:auto;max-height:58dvh}
 .boardCard{padding:8px}
 .controlsColumn{overflow-y:auto}
-.grid{width:min(100%,400px,calc((100dvh - 530px)*18/11))}
+.grid{width:min(100%,calc((100dvh - 330px)*18/11))}
 .brand h1{font-size:17px}
 .mark{width:33px;height:33px;font-size:19px}
 .top-right{gap:5px}
@@ -72,7 +72,7 @@ body.observer .latestAction{display:none}
 .boardCard .message{font-size:12px}
 }
 @media(max-height:590px){
-.grid{width:min(100%,calc((100dvh - 350px)*18/11))}
+.grid{width:min(100%,calc((100dvh - 210px)*18/11))}
 .boardCard .objective{line-height:1.2}
 .boardCard .sectionHead .eyebrow{display:none}
 .mapLegend{display:none}
@@ -103,7 +103,7 @@ body.observer .latestAction{display:none}
   <div class="sectionHead"><div><div class="eyebrow">Experiment control</div><h2>Scenario & recording</h2></div></div>
   <p class="minor">Paste a level or generate a random one while Allan waits. Click Release to agent when you are done, then return to Agent view. Allan can begin only after release. Everything runs locally in this browser.</p>
   <div class="field"><label for="levelText">Paste level layout (18 × 11, one character per tile)</label><textarea id="levelText" class="levelInput" spellcheck="false" aria-label="Editable level layout"></textarea></div>
-  <p class="minor">Legend: . floor, # wall, A Allan, C competitor, 1 Exit A, 2 Exit B, S stone, K knife, B brass key, I iron key, P bow, R rope, F food (apple), X bomb (can injure Allan). Paste 11 rows of 18 characters, or one compact 198-character string. Required: exactly one A (Allan) and at least one exit (1 or 2). All other symbols are optional, but each may occur at most once. With no iron key or bomb, exits start unlocked. Spaces and newlines are ignored.</p>
+  <p class="minor">Legend: . floor, # solid wall, G glass wall (transparent, breakable), A Allan, C competitor, 1 Exit A, 2 Exit B, S stone, K knife, B brass key, I iron key, P bow, R rope, F food (apple), X bomb (can injure Allan). Paste 11 rows of 18 characters, or one compact 198-character string. Required: exactly one A (Allan) and at least one exit (1 or 2). All other symbols are optional, but each may occur at most once. With no iron key or bomb, exits start unlocked. Spaces and newlines are ignored.</p>
   <div class="toolbar"><button type="button" class="btn primary" id="loadLevelBtn">Load pasted level</button><button type="button" class="btn" id="copyLevelBtn">Copy level code</button><button type="button" class="btn" id="randomLevelBtn">Generate random level</button></div>
   <div class="liveIndicator" id="adminLiveStatus">Same-browser setup: paste a level, load it, release the agent, and switch back to Agent view. No server required.</div>
   <div class="setupGrid">
@@ -114,7 +114,7 @@ body.observer .latestAction{display:none}
     <div class="field"><label for="doorX">Exit A X</label><input id="doorX" type="number" min="0" max="17"></div>
     <div class="field"><label for="doorY">Exit A Y</label><input id="doorY" type="number" min="0" max="10"></div><div class="field"><label for="door2X">Exit B X</label><input id="door2X" type="number" min="0" max="17"></div><div class="field"><label for="door2Y">Exit B Y</label><input id="door2Y" type="number" min="0" max="10"></div>
     <div class="field"><label for="rivalFrequency">Competitor moves every N turns</label><input id="rivalFrequency" type="number" min="1" max="10"></div>
-    <div class="note">Vision: unlimited across the entire map. Walls still block sight. Leave both X and Y empty to omit an optional competitor or exit.</div>
+    <div class="note">Vision: unlimited across the entire map. Solid walls block sight; glass blocks movement but not sight. Leave both X and Y empty to omit an optional competitor or exit.</div>
   </div>
   <div class="toolbar"><button type="button" class="btn" id="applySetup">Apply scenario</button><button type="button" class="btn" id="editWalls">Edit walls: OFF</button><button type="button" class="btn" id="shareScenario">Copy agent link</button></div>
   <div class="toolbar" style="margin-top:8px"><button type="button" class="btn primary" id="startBtn">Release to agent</button><button type="button" class="btn" id="pauseBtn">Pause</button><button type="button" class="btn warn" id="resetBtn">Reset</button></div>
@@ -132,14 +132,15 @@ body.observer .latestAction{display:none}
 <div class="inline"><div class="field"><label for="travelPace">Travel speed</label><select id="travelPace"><option value="move">Walk · 1 tile/turn</option><option value="sprint">Sprint · up to 2 tiles/turn</option></select></div><div class="field"><label for="travelBtn">Long trip</label><button type="button" class="btn primary" id="travelBtn">Move to destination</button></div></div>
 <div class="actions"><button type="button" class="btn" data-act="move" data-dir="0,-1">↑ North</button><button type="button" class="btn" data-act="move" data-dir="-1,0">← West</button><button type="button" class="btn" data-act="move" data-dir="1,0">East →</button><button type="button" class="btn" data-act="move" data-dir="0,1">↓ South</button></div>
 <div class="field"><label for="sprintDir">Sprint direction (up to 2 tiles, costs 28 energy)</label><select id="sprintDir"><option value="1,0">East</option><option value="0,-1">North</option><option value="0,1">South</option><option value="-1,0">West</option></select></div>
-<div class="toolbar"><button type="button" class="btn" id="sprintBtn">Sprint</button><button type="button" class="btn" id="inspectBtn">Inspect</button><button type="button" class="btn" id="pickupBtn">Pick up</button><button type="button" class="btn" id="useBtn">Use item</button><button type="button" class="btn" id="speakBtn">Speak</button><button type="button" class="btn" id="waitBtn">Wait</button></div>
+<div class="field"><label for="strikeDir">Strike an adjacent tile (costs 6 energy per attempt)</label><select id="strikeDir"><option value="1,0">East</option><option value="0,-1">North</option><option value="0,1">South</option><option value="-1,0">West</option></select></div>
+<div class="toolbar"><button type="button" class="btn warn" id="strikeBtn">Strike</button><button type="button" class="btn" id="sprintBtn">Sprint</button><button type="button" class="btn" id="inspectBtn">Inspect</button><button type="button" class="btn" id="pickupBtn">Pick up</button><button type="button" class="btn" id="useBtn">Use item</button><button type="button" class="btn" id="speakBtn">Speak</button><button type="button" class="btn" id="waitBtn">Wait</button></div>
 <div class="inline"><div class="field"><label for="target">Visible target / item</label><select id="target"><option value="">Select target</option></select></div><div class="field"><label for="useOn">Use item on</label><select id="useOn"><option value="none">Examine / self</option><option value="rival">Competitor</option></select></div></div>
 <div class="field"><label for="speech">Words to say (Speak action)</label><input id="speech" type="text" maxlength="240" placeholder="What do you want to say?"></div>
-<p class="minor" style="margin-bottom:0">The world continues to run during long trips. Explain your actions in the Work chat; the game displays the actual outcome.</p>
+<p class="minor" style="margin-bottom:0">Glass walls are visible and let you see through them. Strike adjacent glass to crack it; repeated strikes may shatter it. Explain your actions in the Work chat; the game displays the actual outcome.</p>
 </section>
 </aside>
 </div>
-<p class="endline">LIFE AI Lab v1.2 · Standalone HTML · Chat-based reasons · No backend</p>
+<p class="endline">LIFE AI Lab v1.3 · Standalone HTML · Chat-based reasons · No backend</p>
 </div>
 <script>
 "use strict";
@@ -160,6 +161,7 @@ const INITIAL = {
   rope: { x: 9, y: 7 },
   apple: { x: 2, y: 9 },
   bomb: { x: 10, y: 9 },
+  glass: [],
   walls: [
     { x: 5, y: 3 }, { x: 5, y: 4 }, { x: 5, y: 5 }, { x: 5, y: 6 },
     { x: 11, y: 6 }, { x: 11, y: 7 }, { x: 11, y: 8 },
@@ -196,6 +198,7 @@ function newWorld() {
     doorLocked: Boolean(config.door && (config.ironKey || config.bomb)),
     door2Locked: Boolean(config.door2 && (config.ironKey || config.bomb)),
     walls: clone(config.walls),
+    glass: clone(config.glass || []).map(point => ({ ...point, hits: 0, durability: 2 + ((point.x * 31 + point.y * 17) % 3) })),
     turn: 0,
     phase: "ready",
     released: sharedAgent,
@@ -215,7 +218,7 @@ function newWorld() {
 
 // Check whether a cell blocks movement.
 function blocked(point) {
-  return !inside(point) || state.walls.some(wall => same(wall, point));
+  return !inside(point) || state.walls.some(wall => same(wall, point)) || state.glass.some(glass => same(glass, point));
 }
 
 // Check whether a wall lies between the viewer and the target.
@@ -310,6 +313,12 @@ function renderMap() {
       cell.dataset.pos = coordinate;
       const wall = state.walls.some(item => same(item, point));
       if (wall && explored) cell.classList.add("wall");
+      const glass = state.glass.find(item => same(item, point));
+      if (glass && explored) {
+        cell.classList.add("glass");
+        if (canSee && glass.hits) cell.classList.add(`crack${Math.min(3, glass.hits)}`);
+        cell.title = `Glass wall at ${coordinate}: ${glass.hits} hit(s), ${glass.durability - glass.hits} remaining.`;
+      }
       if (editingWalls && observer && state.phase === "ready") {
         cell.classList.add("editable");
         cell.addEventListener("click", () => toggleWall(point));
@@ -340,7 +349,7 @@ function renderMap() {
         token.textContent = label;
         cell.append(token);
       }
-      const description = !explored ? "unexplored" : wall ? "wall" : label || "empty";
+      const description = !explored ? "unexplored" : wall ? "solid wall" : glass ? `glass wall, ${canSee ? `${glass.hits} crack(s), ${glass.durability - glass.hits} hit(s) remaining` : "last known"}` : label || "empty";
       cell.setAttribute("aria-label", `${coordinate}: ${description}${!canSee && explored ? " (last known)" : ""}`);
       grid.append(cell);
     }
@@ -392,7 +401,7 @@ function render() {
   $("latestAllanAction").textContent = latestAllan ? latestAllan.text : "No actions yet";
   $("latestAllanTurn").textContent = latestAllan ? `Turn ${latestAllan.turn} · Allan` : "Waiting for Allan to act.";
   const active = state.phase === "running";
-  for (const button of document.querySelectorAll("[data-act], #sprintBtn, #travelBtn, #inspectBtn, #pickupBtn, #useBtn, #speakBtn, #waitBtn")) button.disabled = !active;
+  for (const button of document.querySelectorAll("[data-act], #strikeBtn, #sprintBtn, #travelBtn, #inspectBtn, #pickupBtn, #useBtn, #speakBtn, #waitBtn")) button.disabled = !active;
   $("startBtn").disabled = state.phase !== "ready" || state.released;
   $("agentStartBtn").disabled = !(state.phase === "ready" && state.released);
   $("agentStartBtn").classList.toggle("hidden", observer || state.phase !== "ready" || !state.released);
@@ -655,6 +664,24 @@ function perform(action, target, extra) {
     }
     return { success: moved > 0, text: lockedDoor ? (moved ? `Moved ${moved} tile(s), but the exit is locked.` : "The exit is locked. Find a way to open it.") : moved ? `Moved ${moved} tile${moved === 1 ? "" : "s"} to (${person.x},${person.y}).` : "The path is blocked." };
   }
+  if (action === "strike") {
+    const [dx, dy] = extra.split(",").map(Number);
+    if (!Number.isInteger(dx) || !Number.isInteger(dy) || Math.abs(dx) + Math.abs(dy) !== 1) return { success: false, text: "Choose a cardinal strike direction." };
+    if (person.energy < 6) return { success: false, text: "Not enough energy to strike." };
+    const point = { x: person.x + dx, y: person.y + dy };
+    if (!inside(point)) return { success: false, text: "Nothing to strike outside the room." };
+    const glass = state.glass.find(tile => same(tile, point));
+    const solid = state.walls.some(tile => same(tile, point));
+    if (!glass && !solid) return { success: false, text: "No wall at that adjacent tile. Choose a wall to strike." };
+    person.energy -= 6;
+    if (solid) return { success: true, text: `Struck the solid wall at (${point.x},${point.y}). It did not break.` };
+    glass.hits++;
+    if (glass.hits >= glass.durability) {
+      state.glass = state.glass.filter(tile => !same(tile, point));
+      return { success: true, text: `Struck the glass at (${point.x},${point.y}). It shattered after ${glass.hits} blows! The tile is now open.` };
+    }
+    return { success: true, text: `Struck the glass at (${point.x},${point.y}). Cracks spread across it (${glass.hits}/${glass.durability} blows). It still blocks movement.` };
+  }
   if (action === "inspect") {
     const entity = visibleEntities().find(item => item.name === target);
     if (!entity) return { success: false, text: "That target is not visible." };
@@ -768,7 +795,6 @@ function perform(action, target, extra) {
   if (action === "speak") {
     if (!extra.trim()) return { success: false, text: "No words were entered." };
     if (!state.rival) return { success: false, text: "There is nobody here to speak to." };
-    if (distance(person, state.rival) > 4) return { success: false, text: "The competitor is too far away to hear." };
     if (state.rival.health <= 0) return { success: false, text: "The competitor cannot respond." };
     return { success: true, text: `You said: “${extra.trim()}”. The competitor heard you but remains focused on the race.` };
   }
@@ -782,7 +808,7 @@ function perform(action, target, extra) {
 // Toggle walls only in setup mode, never while an experiment is running.
 function toggleWall(point) {
   if (!observer || !editingWalls || state.phase !== "ready" || state.released) return;
-  const reserved = Object.values(LEVEL_SYMBOLS).map(name => config[name]).filter(Boolean);
+  const reserved = [...Object.values(LEVEL_SYMBOLS).map(name => config[name]).filter(Boolean), ...(config.glass || [])];
   if (reserved.some(item => same(item, point))) { messageText = "Cannot place a wall on a person, object, or exit."; render(); return; }
   config.walls = config.walls.some(wall => same(wall, point)) ? config.walls.filter(wall => !same(wall, point)) : [...config.walls, clone(point)];
   newWorld();
@@ -827,7 +853,7 @@ function applySetup() {
     render();
     return;
   }
-  if (next.walls.some(wall => positions.some(point => same(wall, point))) || !Number.isInteger(next.rivalFrequency) || next.rivalFrequency < 1 || next.rivalFrequency > 10) {
+  if ([...next.walls, ...(next.glass || [])].some(wall => positions.some(point => same(wall, point))) || !Number.isInteger(next.rivalFrequency) || next.rivalFrequency < 1 || next.rivalFrequency > 10) {
     messageText = "Invalid scenario: check walls and competitor frequency.";
     render();
     return;
@@ -857,14 +883,16 @@ function loadScenario() {
     const binary = atob(encoded.replace(/-/g, "+").replace(/_/g, "/"));
     const bytes = Uint8Array.from(binary, character => character.charCodeAt(0));
     const parsed = JSON.parse(new TextDecoder().decode(bytes));
-    if (!parsed || !Array.isArray(parsed.walls)) return;
+    if (!parsed || !Array.isArray(parsed.walls) || (parsed.glass && !Array.isArray(parsed.glass))) return;
     const restored = { ...clone(INITIAL), ...parsed };
+    restored.glass = restored.glass || [];
     const positions = Object.values(LEVEL_SYMBOLS).map(name => restored[name]).filter(Boolean);
-    const points = [...positions, ...restored.walls];
+    const points = [...positions, ...restored.walls, ...restored.glass];
     if (!restored.allan || (!restored.door && !restored.door2)) return;
     if (points.some(point => !point || !Number.isInteger(point.x) || !Number.isInteger(point.y) || !inside(point))) return;
     if (new Set(positions.map(key)).size !== positions.length) return;
-    if (restored.walls.some(wall => positions.some(point => same(wall, point)))) return;
+    if ([...restored.walls, ...restored.glass].some(wall => positions.some(point => same(wall, point)))) return;
+    if (new Set([...restored.walls, ...restored.glass].map(key)).size !== restored.walls.length + restored.glass.length) return;
     if (!Number.isInteger(restored.rivalFrequency) || restored.rivalFrequency < 1 || restored.rivalFrequency > 10) return;
     delete restored.visionRadius;
     config = clone(restored);
@@ -887,7 +915,7 @@ function download(filename, data, type) {
 // Format only events visible in the currently selected view for text export or copying.
 function readableEventLog() {
   const lines = [
-    "LIFE AI Lab v1.2",
+    "LIFE AI Lab v1.3",
     `Started: ${state.startedAt || "not started"}`,
     `Phase: ${state.phase}`,
     `Turn: ${state.turn}`,
@@ -905,6 +933,7 @@ function readableEventLog() {
 function formatLevel(source) {
   const cells = Array.from({ length: HEIGHT }, () => Array(WIDTH).fill("."));
   for (const wall of source.walls) cells[wall.y][wall.x] = "#";
+  for (const glass of source.glass || []) cells[glass.y][glass.x] = "G";
   for (const [name, symbol] of Object.entries(LEVEL_REVERSE)) {
     const point = source[name];
     if (point) cells[point.y][point.x] = symbol;
@@ -916,15 +945,17 @@ function formatLevel(source) {
 function parseLevel(input) {
   const raw = input.replace(/\s+/g, "").toUpperCase().replace(/^LIFE1:/, "");
   if (raw.length !== WIDTH * HEIGHT) throw new Error(`Expected ${WIDTH * HEIGHT} tiles, received ${raw.length}.`);
-  if (/[^.#AC12SKBIPRFX]/.test(raw)) throw new Error("Unsupported tile symbol. Use only . # A C 1 2 S K B I P R F X.");
+  if (/[^.#GAC12SKBIPRFX]/.test(raw)) throw new Error("Unsupported tile symbol. Use only . # G A C 1 2 S K B I P R F X.");
   const next = clone(config);
   next.walls = [];
+  next.glass = [];
   for (const name of Object.values(LEVEL_SYMBOLS)) next[name] = null;
   const found = new Set();
   for (let index = 0; index < raw.length; index++) {
     const symbol = raw[index];
     const point = { x: index % WIDTH, y: Math.floor(index / WIDTH) };
     if (symbol === "#") next.walls.push(point);
+    if (symbol === "G") next.glass.push(point);
     const name = LEVEL_SYMBOLS[symbol];
     if (!name) continue;
     if (found.has(symbol)) throw new Error(`Duplicate ${symbol} (${name}).`);
@@ -1033,9 +1064,10 @@ function bindControls() {
     catch (_) { window.prompt("Copy this agent scenario URL:", scenarioLink()); messageText = "Copy the displayed scenario URL."; }
     render();
   });
-  $("exportBtn").addEventListener("click", () => download(`life-ai-lab-${Date.now()}.json`, JSON.stringify({ project: "LIFE AI Lab", version: "1.2", exportedAt: new Date().toISOString(), ...state }, null, 2), "application/json"));
+  $("exportBtn").addEventListener("click", () => download(`life-ai-lab-${Date.now()}.json`, JSON.stringify({ project: "LIFE AI Lab", version: "1.3", exportedAt: new Date().toISOString(), ...state }, null, 2), "application/json"));
   $("exportTextBtn").addEventListener("click", () => download(`life-ai-lab-${Date.now()}.txt`, readableEventLog(), "text/plain"));
   document.querySelectorAll("[data-act='move']").forEach(button => button.addEventListener("click", () => takeAction("move", "", button.dataset.dir)));
+  $("strikeBtn").addEventListener("click", () => takeAction("strike", "", $("strikeDir").value));
   $("sprintBtn").addEventListener("click", () => takeAction("sprint", "", $("sprintDir").value));
   $("travelBtn").addEventListener("click", moveToDestination);
   $("inspectBtn").addEventListener("click", () => takeAction("inspect", $("target").value));
